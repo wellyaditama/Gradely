@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "138182673504",
+    "project_id": "gradely-d1db3",
+    "storage_bucket": "gradely-d1db3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138182673504:android:5eefbf8f86a2f531a12f05",
+        "android_client_info": {
+          "package_name": "org.gradely.gradely_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "138182673504-n98g18iequnb2vf74s400g41npce73qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI1-Hn0Is0A7jMlnRk7y08k-paB5-u0TY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "138182673504-n98g18iequnb2vf74s400g41npce73qa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
