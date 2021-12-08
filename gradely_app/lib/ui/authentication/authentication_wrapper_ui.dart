@@ -11,14 +11,16 @@ class AuthenticationWrapper extends StatefulWidget {
 }
 
 class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
+  bool showSignIn = false;
+
+  void toggleView() {
+    setState(() {
+      showSignIn = !showSignIn;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool showSignIn = false;
-    void toggleView() {
-      setState(() {
-        showSignIn = !showSignIn;
-      });
-    }
 
     if (showSignIn) {
       return LoginUI(toggleView: toggleView);

@@ -3,8 +3,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/ui/firebase_initialization.dart';
 import 'package:lottie/lottie.dart';
 import 'onboarding_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreensUI extends StatefulWidget {
   const SplashScreensUI({Key? key}) : super(key: key);
@@ -18,13 +20,21 @@ class _SplashScreensUIState extends State<SplashScreensUI> {
   void initState() {
     super.initState();
 
-    Timer(
-      const Duration(seconds: 3),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => OnboardingScreensUI()),
-      ),
-    );
+    Timer(const Duration(seconds: 3),()=>checkFirstSeen());
+  }
+
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
+      Navigator.of(context).pushReplacement(
+          new MaterialPageRoute(builder: (context) => new FirebaseInitialization()));
+    } else {
+      await prefs.setBool('seen', true);
+      Navigator.of(context).pushReplacement(
+          new MaterialPageRoute(builder: (context) => new OnboardingScreensUI()));
+    }
   }
 
   @override

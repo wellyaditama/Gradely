@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradely_app/model/user_account.dart';
+import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
+import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -27,10 +29,14 @@ class AuthenticationService {
   }
 
   Future<String?> signUp(
-      {required String email, required String password}) async {
+      {required String email, required String password, required UserRegister userRegister}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
+      User? user = userCredential.user;
+
+      await DatabaseService(user!.uid).updateUserAccountData(userRegister);
+
       return "Signed up";
     } on FirebaseAuthException catch (e) {
       return e.message;
