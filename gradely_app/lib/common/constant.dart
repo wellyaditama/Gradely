@@ -6,4 +6,5 @@ class ConstantVariables {
   static final String iconDefaultAssistantFemale = 'https://firebasestorage.googleapis.com/v0/b/gradely-d1db3.appspot.com/o/account%2FprofilePicture%2Fic_assistant_female.png?alt=media&token=272b68d3-776e-490c-84e7-eb56f0f0c078';
   static final String iconDefaultAssistantMale = 'https://firebasestorage.googleapis.com/v0/b/gradely-d1db3.appspot.com/o/account%2FprofilePicture%2Fic_assistant_male.png?alt=media&token=c7cdad1a-9626-41b9-9eab-757c4c06a91f';
 
+  static final List<String> accountType = ['Student', 'Teacher', 'Assistant'];
 }

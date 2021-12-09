@@ -7,11 +7,11 @@ import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/ui/student/main_student_ui.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
 import 'package:gradely_app/widgets/widget_email_not_verified.dart';
 import 'package:gradely_app/widgets/widget_loading_screens.dart';
 import 'package:provider/provider.dart';
-
 import 'add_classes_teacher_ui.dart';
 import 'classes_teacher_ui.dart';
 
@@ -31,8 +31,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
   @override
   Widget build(BuildContext context) {
     final uid = Provider.of<UserUID?>(context);
-    final SnackBar snackBar = SnackBar(content: Text('This is user'));
-    final SnackBar snackBar2 = SnackBar(content: Text('This is scanner'));
+    final SnackBar snackBar = SnackBar(content: Text('Coming soon!'));
 
     print(uid!.uid);
 
@@ -41,15 +40,20 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
           UserRegister userRegister = snapshot.data;
-          return Container(
-            child: Scaffold(
+          if (userRegister.currentAccountType ==
+              ConstantVariables.accountType[0]) {
+            return MainStudentUI(
+              userRegister: userRegister,
+            );
+          } else {
+            return Scaffold(
               appBar: AppBar(
                 backgroundColor: Styles.primaryColor,
                 title: Text(_title),
                 actions: [
                   IconButton(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar2);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     icon: const Icon(
                       Icons.notifications,
@@ -408,8 +412,8 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                   ],
                 ),
               ),
-            ),
-          );
+            );
+          }
         } else {
           return WidgetLoadingScreens();
         }
