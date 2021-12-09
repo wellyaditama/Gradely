@@ -8,12 +8,11 @@ import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
-import 'package:gradely_app/widgets/teacher/classes_list.dart';
 import 'package:gradely_app/widgets/widget_email_not_verified.dart';
-import 'package:gradely_app/widgets/widget_error.dart';
 import 'package:gradely_app/widgets/widget_loading_screens.dart';
 import 'package:provider/provider.dart';
 
+import 'add_classes_teacher_ui.dart';
 import 'classes_teacher_ui.dart';
 
 class HomeTeacherUI extends StatefulWidget {
@@ -26,9 +25,8 @@ class HomeTeacherUI extends StatefulWidget {
 class _HomeTeacherUIState extends State<HomeTeacherUI> {
   final AuthenticationService _authenticationService = AuthenticationService();
   String _title = 'Gradely Teacher';
-  // TODO: Change to 1
 
-  int _currentMenu = 3;
+  int _currentMenu = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +52,15 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                       ScaffoldMessenger.of(context).showSnackBar(snackBar2);
                     },
                     icon: const Icon(
-                      Icons.qr_code_scanner,
+                      Icons.notifications,
                       color: Colors.white,
                     ),
                   ),
                   InkWell(
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      setState(() {
+                        _currentMenu = 2;
+                      });
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(100.0)),
@@ -257,11 +257,136 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                       WidgetEmailNotVerified(),
                       // WidgetStartClass(),
                       // WidgetDashboard(),
-                      ClassesList(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: Text(
+                          'All the Classes',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black54,
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      Divider(),
+                      ClassesTeacherUI(),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _currentMenu = 3;
+                            });
+                          },
+                          child: Text('Show More')),
+                      Divider(),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: Text(
+                          'Recent activity : ',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black54,
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Coming Soon'),
+                              ));
+                            });
+                          },
+                          child: Text('Show More')),
+                      Divider(),
+                      Divider(),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: Text(
+                          'Your assistant : ',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black54,
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Coming Soon'),
+                              ));
+                            });
+                          },
+                          child: Text('Show More')),
+                      Divider(),
+                      Divider(),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: Text(
+                          'Statistics : ',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black54,
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Coming Soon'),
+                              ));
+                            });
+                          },
+                          child: Text('Show More')),
+                      Divider(),
                     ] else if (_currentMenu == 2) ...[
                       Container(child: AccountTeacherUI()),
                     ] else if (_currentMenu == 3) ...[
                       ClassesTeacherUI(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ClassesAddTeacherUI()));
+                          },
+                          label: Text('Add New Class'),
+                          style: ElevatedButton.styleFrom(),
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
                     ] else if (_currentMenu == 4) ...[
                       Container(child: Text('This is menu 4')),
                       Container(child: Text('this is content menu 4')),

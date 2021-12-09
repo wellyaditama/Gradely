@@ -11,7 +11,8 @@ class Classroom {
   final DateTime classEnd;
   final int studentCount;
   final String day;
+  final String classToken;
 
   Classroom(this.className, this.subjectName, this.teacherName, this.teacherID,
-      this.classPicture, this.classBegin, this.classEnd, this.studentCount, this.day);
+      this.classPicture, this.classBegin, this.classEnd, this.studentCount, this.day, this.classToken);
 }

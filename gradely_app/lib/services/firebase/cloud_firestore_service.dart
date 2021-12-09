@@ -4,8 +4,8 @@ import 'package:gradely_app/model/user_register.dart';
 
 class DatabaseService {
   final String uid;
-  final CollectionReference accountsCollection = FirebaseFirestore.instance
-      .collection('accounts');
+  final CollectionReference accountsCollection =
+      FirebaseFirestore.instance.collection('accounts');
 
   DatabaseService(this.uid);
 
@@ -27,7 +27,6 @@ class DatabaseService {
     });
   }
 
-
   Stream<UserRegister> get userRegister {
     return accountsCollection.doc(uid).snapshots().map((doc) {
       return UserRegister(
@@ -41,7 +40,6 @@ class DatabaseService {
           uid);
     });
   }
-
 }
 
 class DatabaseTeacherClass {
@@ -50,13 +48,15 @@ class DatabaseTeacherClass {
 
   DatabaseTeacherClass(this.uid, this.className);
 
-  final CollectionReference classCollection = FirebaseFirestore.instance
-      .collection('classes');
-
+  final CollectionReference classCollection =
+      FirebaseFirestore.instance.collection('classes');
 
   Future updateTeacherClassData(Classroom classroom) async {
-    return await classCollection.doc(uid).collection('teacherClasses').doc(
-        className).set({
+    return await classCollection
+        .doc(uid)
+        .collection('teacherClasses')
+        .doc(className)
+        .set({
       'className': classroom.className,
       'subjectName': classroom.subjectName,
       'teacherName': classroom.teacherName,
@@ -66,11 +66,14 @@ class DatabaseTeacherClass {
       'classEnd': classroom.classEnd,
       'studentCount': classroom.studentCount,
       'day': classroom.day,
+      'classToken': classroom.classToken
     }).catchError((e) => print(e.toString()));
   }
 
   Stream<Classroom> get classroom {
-    return classCollection.doc(uid).collection('teacherClasses')
+    return classCollection
+        .doc(uid)
+        .collection('teacherClasses')
         .doc(className)
         .snapshots()
         .map((doc) {
@@ -83,7 +86,69 @@ class DatabaseTeacherClass {
           doc['classBegin'],
           doc['classEnd'],
           doc['studentCount'],
-          doc['day']);
+          doc['day'],
+          doc['classToken']);
     });
+  }
+
+  Stream<QuerySnapshot> get listClassroomTeacher {
+    return classCollection.doc(uid).collection('teacherClasses')
+        .snapshots();
+    //     .map((event) {
+    //   List<Classroom> _listClassroom = [];
+    //
+    //   event.docs.forEach((doc) {
+    //     Classroom _classroom = Classroom(
+    //         doc['classname'],
+    //         doc['subjectName'],
+    //         doc['teacherName'],
+    //         doc['teacherID'],
+    //         doc['classPicture'],
+    //         doc['classBegin'],
+    //         doc['classEnd'],
+    //         doc['studentCount'],
+    //         doc['day'],
+    //         doc['classToken']);
+    //     _listClassroom.add(_classroom);
+    //   });
+    //
+    //   return _listClassroom;
+    // });
+  }
+
+
+
+  Future<bool> getClassroom() async {
+    // List<Classroom> _listClassroom = [];
+    //
+    // classCollection
+    //     .doc(uid)
+    //     .collection('teacherClasses')
+    //     .snapshots()
+    //     .map((event) {
+    //   for (var doc in event.docs) {
+    //     Classroom _classroom = Classroom(
+    //         doc['classname'],
+    //         doc['subjectName'],
+    //         doc['teacherName'],
+    //         doc['teacherID'],
+    //         doc['classPicture'],
+    //         doc['classBegin'],
+    //         doc['classEnd'],
+    //         doc['studentCount'],
+    //         doc['day'],
+    //         doc['classToken']);
+    //     _listClassroom.add(_classroom);
+    //   }
+    // });
+    //
+    // return _listClassroom;
+
+    // Check if the collection exist
+
+    return classCollection.doc(uid).collection('teacherClasses').get().then((value) {
+      return value.docs.isNotEmpty;
+    });
+
   }
 }

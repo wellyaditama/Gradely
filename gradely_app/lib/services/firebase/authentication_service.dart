@@ -9,7 +9,7 @@ class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   UserUID? _userUID(User? user) {
-    return user != null ? UserUID(user.uid) : null;
+    return user != null ? UserUID(user.uid, user.emailVerified) : null;
   }
 
   Stream<UserUID?> get user {

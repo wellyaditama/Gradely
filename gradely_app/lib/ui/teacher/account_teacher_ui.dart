@@ -9,6 +9,7 @@ import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
 import 'package:gradely_app/services/firebase/firebase_storage_service.dart';
 import 'package:gradely_app/widgets/widget_error.dart';
+import 'package:gradely_app/widgets/widget_loading_screens.dart';
 import 'package:provider/provider.dart';
 import 'package:path/path.dart';
 
@@ -274,7 +275,7 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
             ],
           );
         } else {
-          return WidgetError();
+          return WidgetLoadingScreens();
         }
       },
     );

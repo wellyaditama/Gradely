@@ -7,24 +7,23 @@ class WidgetLoadingScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
               Styles.primaryColor,
               Styles.primaryVariantColor,
-            ]
-          ),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.all(20.0),
-          child: SpinKitDoubleBounce(
-            color: Colors.white,
-            size: 150.0,
-          ),
+            ]),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.all(20.0),
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 150.0,
         ),
       ),
     );
