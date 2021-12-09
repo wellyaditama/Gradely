@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradely_app/ui/authentication/authentication_wrapper_ui.dart';
-import 'package:gradely_app/ui/teacher/home_teacher_ui.dart';
+import 'package:gradely_app/ui/teacher/main_teacher_ui.dart';
 import 'package:provider/provider.dart';
 
 import 'model/user_uid.dart';

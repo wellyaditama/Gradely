@@ -324,7 +324,8 @@ class _RegisterUIState extends State<RegisterUI> {
                           padding: EdgeInsets.only(top: 10.0),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -444,10 +445,20 @@ class _RegisterUIState extends State<RegisterUI> {
                                   loading = !loading;
                                 });
 
-                                UserRegister userRegister = UserRegister(email, isVerified, name, university, genderString, semester, currentAccountType, 'uid');
+                                UserRegister userRegister = UserRegister(
+                                    email,
+                                    isVerified,
+                                    name,
+                                    university,
+                                    genderString,
+                                    semester,
+                                    currentAccountType,
+                                    'uid');
 
                                 dynamic result = await _authService.signUp(
-                                    email: email, password: password, userRegister: userRegister);
+                                    email: email,
+                                    password: password,
+                                    userRegister: userRegister);
                                 if (result == null) {
                                   setState(() {
                                     loading = false;
@@ -464,7 +475,6 @@ class _RegisterUIState extends State<RegisterUI> {
                                 debugPrint(password);
                                 debugPrint(validatePassword);
                                 debugPrint(currentAccountType);
-
                               }
 
                               final user =
