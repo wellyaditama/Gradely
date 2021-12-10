@@ -44,13 +44,11 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
                 decoration: BoxDecoration(
                   color: Styles.primaryColor,
                 ),
-                child: FadeInImage.assetNetwork(
+                child: Image.asset(
+                  'assets/ic_teacher_male.png',
                   fit: BoxFit.contain,
                   width: double.infinity,
                   height: 200.0,
-                  placeholder: 'assets/ic_teacher_male.png',
-                  image:
-                      'https://firebasestorage.googleapis.com/v0/b/gradely-d1db3.appspot.com/o/account%2FprofilePicture%2Fic_teacher_male.png?alt=media&token=fa3030cc-d7ad-488f-b9f5-d503e5954b3e',
                 ),
               ),
               Padding(

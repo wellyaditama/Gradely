@@ -1,40 +1,28 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'dart:async';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
-import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
 import 'package:gradely_app/widgets/widget_big_qr_code_image.dart';
-import 'package:lottie/lottie.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
-class DetailClassTeacher extends StatefulWidget {
+class DetailStudentClass extends StatefulWidget {
   final Classroom classroom;
 
-  const DetailClassTeacher({Key? key, required this.classroom})
+  const DetailStudentClass({Key? key, required this.classroom})
       : super(key: key);
 
   @override
-  State<DetailClassTeacher> createState() => _DetailClassTeacherState();
+  _DetailStudentClassState createState() => _DetailStudentClassState();
 }
 
-class _DetailClassTeacherState extends State<DetailClassTeacher> {
+class _DetailStudentClassState extends State<DetailStudentClass> {
   GlobalKey globalKey = GlobalKey();
-
-  @override
-  void initState() {
-    super.initState();
-    String qrData = widget.classroom.teacherID +
-        widget.classroom.className +
-        widget.classroom.classToken;
-
-    print(qrData);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +37,9 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
         actions: [
           IconButton(
             onPressed: () {
-              shareQRCode('Join to class ' + widget.classroom.subjectName + ' ' + widget.classroom.className);
+              shareQRCode(
+                  'Join to class ' + widget.classroom.subjectName + ' ' +
+                      widget.classroom.className);
             },
             icon: Icon(Icons.share),
           ),
@@ -292,47 +282,16 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
               SizedBox(
                 height: 8.0,
               ),
-              ElevatedButton(
-                onPressed: () {
-
-                },
-                child: Text('Begin this Class'),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  String token = 'TE8IG6K2sea5HY99MUOw2Vuf30Y2IF19CcYATZzES';
-                  String teacherUID = token.substring(0, 27);
-                  String className = token.substring(28, 33);
-                  String classToken = token.substring(34);
-
-                  print(teacherUID);
-                  print(className);
-                  print(classToken);
-
-                  // bool isExist = await DatabaseTeacherClass(widget.classroom.teacherID, widget.classroom.className).checkIfClassroomExist().then((value) {
-                  //   print(value);
-                  //   return value;
-                  // });
-                },
-                child: Text(
-                  'Remove this Class',
-                  style: TextStyle(color: Styles.primaryColor),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                ),
-              ),
             ],
           ),
         ),
       ),
     );
   }
-
   Future<void> shareQRCode(String message) async {
     try {
       RenderRepaintBoundary boundary =
-          globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
       var image = await boundary.toImage();
       ByteData? byteData = await image.toByteData(format: ImageByteFormat.png);
       Uint8List pngBytes = byteData!.buffer.asUint8List();
@@ -348,3 +307,4 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
     }
   }
 }
+

@@ -5,7 +5,12 @@ import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
+import 'package:gradely_app/widgets/widget_email_not_verified.dart';
 import 'package:provider/provider.dart';
+
+import 'classes_student_ui.dart';
+import 'join_class_ui.dart';
 
 class MainStudentUI extends StatefulWidget {
   final UserRegister userRegister;
@@ -223,8 +228,54 @@ class _MainStudentUIState extends State<MainStudentUI> {
           ],
         ),
       ),
-      body: Center(
-        child: Text('this is student main page'),
+      body: SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Column(
+          children: [
+            if (_currentMenu == 1) ...[
+              WidgetEmailNotVerified(),
+              SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                width: double.infinity,
+                child: Text(
+                  'All the Classes',
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black54,
+                    fontSize: 20.0,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Divider(),
+              ClassesStudentUI(),
+            ] else if (_currentMenu == 2) ...[
+              AccountTeacherUI(),
+            ] else if (_currentMenu == 3) ...[
+              ClassesStudentUI(),
+              TextButton(
+                child: Text('Join now'),
+                onPressed: () {
+                  UserRegister _userRegister = widget.userRegister;
+
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => JoinClassUI(userRegister: _userRegister,),));
+                },
+              ),
+            ] else if (_currentMenu == 4) ...[
+              Text('This is menu 4'),
+            ] else if (_currentMenu == 5) ...[
+              Text('This is menu 5'),
+            ] else if (_currentMenu == 6) ...[
+              Text('This is menu 6'),
+            ] else if (_currentMenu == 7) ...[
+              Text('This is menu 7'),
+            ]
+          ],
+        ),
       ),
     );
   }

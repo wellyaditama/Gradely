@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/user_register.dart';
 
@@ -66,7 +67,8 @@ class DatabaseTeacherClass {
       'classEnd': classroom.classEnd,
       'studentCount': classroom.studentCount,
       'day': classroom.day,
-      'classToken': classroom.classToken
+      'classToken': classroom.classToken,
+      'isStarted' : classroom.isStarted,
     }).catchError((e) => print(e.toString()));
   }
 
@@ -78,22 +80,23 @@ class DatabaseTeacherClass {
         .snapshots()
         .map((doc) {
       return Classroom(
-          doc['className'],
-          doc['subjectName'],
-          doc['teacherName'],
-          doc['teacherID'],
-          doc['classPicture'],
-          doc['classBegin'],
-          doc['classEnd'],
-          doc['studentCount'],
-          doc['day'],
-          doc['classToken']);
+        doc['className'],
+        doc['subjectName'],
+        doc['teacherName'],
+        doc['teacherID'],
+        doc['classPicture'],
+        doc['classBegin'],
+        doc['classEnd'],
+        doc['studentCount'],
+        doc['day'],
+        doc['classToken'],
+        doc['isStarted'] ?? false,
+      );
     });
   }
 
   Stream<QuerySnapshot> get listClassroomTeacher {
-    return classCollection.doc(uid).collection('teacherClasses')
-        .snapshots();
+    return classCollection.doc(uid).collection('teacherClasses').snapshots();
     //     .map((event) {
     //   List<Classroom> _listClassroom = [];
     //
@@ -115,8 +118,6 @@ class DatabaseTeacherClass {
     //   return _listClassroom;
     // });
   }
-
-
 
   Future<bool> getClassroom() async {
     // List<Classroom> _listClassroom = [];
@@ -146,9 +147,54 @@ class DatabaseTeacherClass {
 
     // Check if the collection exist
 
-    return classCollection.doc(uid).collection('teacherClasses').get().then((value) {
+    return classCollection
+        .doc(uid)
+        .collection('teacherClasses')
+        .get()
+        .then((value) {
       return value.docs.isNotEmpty;
+    });
+  }
+
+  Future<bool> checkIfClassroomExist(String token) async{
+
+    String teacherUID = token.substring(0, 28);
+    String className = token.substring(28, 33);
+    String classToken = token.substring(34);
+    int length = token.length;
+
+    print(teacherUID);
+    print(className);
+    print(classToken);
+    print(length);
+
+    return await classCollection.doc(teacherUID).collection('teacherClasses').doc(className).get().then((value) {
+
+      return value.exists;
     });
 
   }
-}
+
+  Future<Classroom> getClass() async {
+    return await classCollection.doc(uid).collection('teacherClasses').doc(className).get().then((value) {
+      Map<String, dynamic>? data = value.data();
+
+      var className = data?['className'];
+      var subjectName = data?['subjectName'];
+      var teacherName = data?['teacherName'];
+      var teacherID = data?['teacherID'];
+      var classPicture = data?['classPicture'];
+      var classBegin = Utility.convertTimestamptToDateTime(data?['classBegin']);
+      var classEnd = Utility.convertTimestamptToDateTime(data?['classEnd']);
+      var studentCount = data?['studentCount'];
+      var day = data?['day'];
+      var classToken = data?['classToken'];
+      var isStarted = data?['isStarted'];
+
+      Classroom classroom =  Classroom(className, subjectName, teacherName, teacherID, classPicture, classBegin, classEnd, studentCount, day, classToken, isStarted);
+
+      return classroom;
+    });
+  }
+
+ }

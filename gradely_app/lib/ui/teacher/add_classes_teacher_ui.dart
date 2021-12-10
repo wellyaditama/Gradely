@@ -109,7 +109,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                     },
                     enabled: true,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: Icon(Icons.school),
                       hintText: 'Ex : Math..',
                       fillColor: Colors.white,
                       filled: true,
@@ -164,7 +164,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                     },
                     enabled: true,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: Icon(Icons.home),
                       hintText: 'Ex : IF19C..',
                       fillColor: Colors.white,
                       filled: true,
@@ -217,7 +217,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                     },
                     enabled: true,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: Icon(Icons.school),
                       hintText: 'Ex : Rizki Putra..',
                       fillColor: Colors.white,
                       filled: true,
@@ -270,7 +270,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                     },
                     enabled: true,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: Icon(Icons.event),
                       hintText: 'Ex : Monday..',
                       fillColor: Colors.white,
                       filled: true,
@@ -409,13 +409,15 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                             classEnd,
                             studentCount,
                             day,
-                            classToken);
+                            classToken,
+                            false);
 
                         await _databaseTeacherClass
                             .updateTeacherClassData(classroom)
                             .then((value) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Successfully Added!')));
+                          Navigator.pop(context);
                         });
                       }
                     },
@@ -428,9 +430,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     child: Text('Check'),
                   )
                 ],
