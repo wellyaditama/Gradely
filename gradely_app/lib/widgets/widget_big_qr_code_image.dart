@@ -8,19 +8,27 @@ class WidgetBigQRCodeImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 320.0,
-      width: 320.0,
       color: Colors.white,
       child: QrImage(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
         data: qrData,
         version: QrVersions.auto,
         size: 320,
-        gapless: false,
-        embeddedImage: AssetImage('assets/ic_app_logo.png'),
+        embeddedImage:
+        const AssetImage('assets/ic_app_logo.png'),
         embeddedImageStyle: QrEmbeddedImageStyle(
-          size: Size(80, 80),
+          size: const Size(50, 50),
         ),
-      ),
+        errorStateBuilder: (cxt, err) {
+          return const Center(
+            child: Text(
+              "There is some problem...",
+              textAlign: TextAlign.center,
+            ),
+          );
+        },
+      )
     );
   }
 }

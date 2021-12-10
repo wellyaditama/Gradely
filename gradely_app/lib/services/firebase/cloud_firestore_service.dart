@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
+import 'package:gradely_app/model/students.dart';
 import 'package:gradely_app/model/user_register.dart';
 
 class DatabaseService {
@@ -68,8 +69,24 @@ class DatabaseTeacherClass {
       'studentCount': classroom.studentCount,
       'day': classroom.day,
       'classToken': classroom.classToken,
-      'isStarted' : classroom.isStarted,
+      'isStarted': classroom.isStarted,
     }).catchError((e) => print(e.toString()));
+  }
+
+  Future addStudentToAttendance(Student student) async {
+    classCollection
+        .doc(uid)
+        .collection('teacherClasses')
+        .doc(className)
+        .collection('attendance')
+        .doc(student.uid)
+        .set({
+      'uid': student.uid,
+      'email': student.email,
+      'name': student.name,
+      'attendanceTime': student.attendanceTime,
+    }).catchError((e) => print(e.toString()));
+    ;
   }
 
   Stream<Classroom> get classroom {
@@ -93,6 +110,10 @@ class DatabaseTeacherClass {
         doc['isStarted'] ?? false,
       );
     });
+  }
+  
+  Stream<QuerySnapshot> get listStudentAttending {
+    return classCollection.doc(uid).collection('teacherClasses').doc(className).collection('attendance').snapshots();
   }
 
   Stream<QuerySnapshot> get listClassroomTeacher {
@@ -156,8 +177,7 @@ class DatabaseTeacherClass {
     });
   }
 
-  Future<bool> checkIfClassroomExist(String token) async{
-
+  Future<bool> checkIfClassroomExist(String token) async {
     String teacherUID = token.substring(0, 28);
     String className = token.substring(28, 33);
     String classToken = token.substring(34);
@@ -168,15 +188,23 @@ class DatabaseTeacherClass {
     print(classToken);
     print(length);
 
-    return await classCollection.doc(teacherUID).collection('teacherClasses').doc(className).get().then((value) {
-
+    return await classCollection
+        .doc(teacherUID)
+        .collection('teacherClasses')
+        .doc(className)
+        .get()
+        .then((value) {
       return value.exists;
     });
-
   }
 
   Future<Classroom> getClass() async {
-    return await classCollection.doc(uid).collection('teacherClasses').doc(className).get().then((value) {
+    return await classCollection
+        .doc(uid)
+        .collection('teacherClasses')
+        .doc(className)
+        .get()
+        .then((value) {
       Map<String, dynamic>? data = value.data();
 
       var className = data?['className'];
@@ -191,10 +219,21 @@ class DatabaseTeacherClass {
       var classToken = data?['classToken'];
       var isStarted = data?['isStarted'];
 
-      Classroom classroom =  Classroom(className, subjectName, teacherName, teacherID, classPicture, classBegin, classEnd, studentCount, day, classToken, isStarted);
+      Classroom classroom = Classroom(
+          className,
+          subjectName,
+          teacherName,
+          teacherID,
+          classPicture,
+          classBegin,
+          classEnd,
+          studentCount,
+          day,
+          classToken,
+          isStarted);
 
       return classroom;
     });
   }
+}
 
- }

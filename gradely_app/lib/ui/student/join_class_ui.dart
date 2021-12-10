@@ -3,6 +3,7 @@ import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/ui/student/scan_qr_class.dart';
 
 class JoinClassUI extends StatefulWidget {
   const JoinClassUI({Key? key, required this.userRegister}) : super(key: key);
@@ -17,6 +18,13 @@ class _JoinClassUIState extends State<JoinClassUI> {
   final _formKey = GlobalKey<FormState>();
   String classToken = '';
   bool loading = false;
+  var textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    textController.text = classToken;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +72,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                     classToken = value;
                   });
                 },
+                controller: textController,
                 enabled: true,
                 validator: (val) {
                   if (val!.isEmpty) {
@@ -138,12 +147,35 @@ class _JoinClassUIState extends State<JoinClassUI> {
                         fontSize: 16.0),
                   ),
                 ),
+              ),
+              Container(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => ScanQRClass(setData: setData,),));
+                    textController.text = result;
+                  },
+                  style: ElevatedButton.styleFrom(primary: Styles.primaryColor),
+                  child: Text(
+                    'Scan QR',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Poppins',
+                        fontSize: 16.0),
+                  ),
+                ),
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  void setData(String data) {
+    setState(() {
+      classToken = data;
+    });
   }
 
   void AddNewClass(String teacherUID, String className, UserRegister userRegister) async {

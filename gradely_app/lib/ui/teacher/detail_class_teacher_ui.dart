@@ -8,6 +8,7 @@ import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/ui/teacher/class_begin_ui.dart';
 import 'package:gradely_app/widgets/widget_big_qr_code_image.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
@@ -49,7 +50,7 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
         actions: [
           IconButton(
             onPressed: () {
-              shareQRCode('Join to class ' + widget.classroom.subjectName + ' ' + widget.classroom.className);
+              shareQRCode('Join to class ' + widget.classroom.subjectName + ' ' + widget.classroom.className + '\nToken : $qrData');
             },
             icon: Icon(Icons.share),
           ),
@@ -292,36 +293,17 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
               SizedBox(
                 height: 8.0,
               ),
-              ElevatedButton(
-                onPressed: () {
-
-                },
-                child: Text('Begin this Class'),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  String token = 'TE8IG6K2sea5HY99MUOw2Vuf30Y2IF19CcYATZzES';
-                  String teacherUID = token.substring(0, 27);
-                  String className = token.substring(28, 33);
-                  String classToken = token.substring(34);
-
-                  print(teacherUID);
-                  print(className);
-                  print(classToken);
-
-                  // bool isExist = await DatabaseTeacherClass(widget.classroom.teacherID, widget.classroom.className).checkIfClassroomExist().then((value) {
-                  //   print(value);
-                  //   return value;
-                  // });
-                },
-                child: Text(
-                  'Remove this Class',
-                  style: TextStyle(color: Styles.primaryColor),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ClassBegin(classroom: widget.classroom),));
+                  },
+                  child: Text('Begin this Class'),
                 ),
               ),
+
             ],
           ),
         ),
