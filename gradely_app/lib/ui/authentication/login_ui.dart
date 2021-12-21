@@ -18,8 +18,8 @@ class LoginUI extends StatefulWidget {
 class _LoginUIState extends State<LoginUI> {
   final AuthenticationService _authService = AuthenticationService();
   final _formKey = GlobalKey<FormState>();
-  final snackBar = SnackBar(content: Text('Form invalid!'));
-  final snackBarError = SnackBar(content: Text('Invalid!'));
+  final snackBar = const SnackBar(content: Text('Form invalid!'));
+  final snackBarError = const SnackBar(content: Text('Invalid!'));
   bool loading = false;
   String email = '';
   String password = '';
@@ -32,23 +32,23 @@ class _LoginUIState extends State<LoginUI> {
           child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 1.1,
-            decoration: BoxDecoration(color: Styles.primaryColor),
+            decoration: const BoxDecoration(color: Styles.primaryColor),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Visibility(
-                  child: LinearProgressIndicator(
+                  child: const LinearProgressIndicator(
                     color: Styles.secondaryColor,
                     backgroundColor: Styles.primaryVariantColor,
                     minHeight: 5.0,
                   ),
                   visible: loading,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
-                Text(
+                const Text(
                   'Hello Again',
                   style: TextStyle(
                     fontSize: 36.0,
@@ -57,9 +57,9 @@ class _LoginUIState extends State<LoginUI> {
                     color: Colors.white,
                   ),
                 ),
-                Flexible(
+                const Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                         horizontal: 10.0, vertical: 20.0),
                     child: Text(
                       "Welcome Back! You've been missed!",
@@ -96,7 +96,7 @@ class _LoginUIState extends State<LoginUI> {
                               return 'Enter valid email!';
                             }
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.email),
                             hintText: 'Email',
                             fillColor: Colors.white,
@@ -118,7 +118,7 @@ class _LoginUIState extends State<LoginUI> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextFormField(
@@ -137,7 +137,7 @@ class _LoginUIState extends State<LoginUI> {
                             }
                           },
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.lock_outline),
                             hintText: 'Password',
                             fillColor: Colors.white,
@@ -159,15 +159,15 @@ class _LoginUIState extends State<LoginUI> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         InkWell(
                           onTap: () {},
                           child: Container(
                             width: double.infinity,
-                            padding: EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Text(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: const Text(
                               'Forgot your password?',
                               textAlign: TextAlign.end,
                               style: TextStyle(
@@ -177,7 +177,7 @@ class _LoginUIState extends State<LoginUI> {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () async{
@@ -199,7 +199,7 @@ class _LoginUIState extends State<LoginUI> {
                             },
                             style: ElevatedButton.styleFrom(
                                 primary: Styles.secondaryColor),
-                            child: Text(
+                            child: const Text(
                               'Login',
                               style: TextStyle(
                                   color: Colors.white,
@@ -208,13 +208,13 @@ class _LoginUIState extends State<LoginUI> {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
                               widget.toggleView();
                             },
-                            child: Text(
+                            child: const Text(
                               'Register',
                               style: TextStyle(
                                   color: Colors.white,

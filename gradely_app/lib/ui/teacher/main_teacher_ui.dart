@@ -7,6 +7,7 @@ import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/ui/assistant/home_assistant_ui.dart';
 import 'package:gradely_app/ui/student/main_student_ui.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
 import 'package:gradely_app/widgets/widget_email_not_verified.dart';
@@ -24,14 +25,14 @@ class HomeTeacherUI extends StatefulWidget {
 
 class _HomeTeacherUIState extends State<HomeTeacherUI> {
   final AuthenticationService _authenticationService = AuthenticationService();
-  String _title = 'Gradely Teacher';
+  final String _title = 'Gradely Teacher';
 
   int _currentMenu = 1;
 
   @override
   Widget build(BuildContext context) {
     final uid = Provider.of<UserUID?>(context);
-    final SnackBar snackBar = SnackBar(content: Text('Coming soon!'));
+    final SnackBar snackBar = const SnackBar(content: Text('Coming soon!'));
 
     print(uid!.uid);
 
@@ -45,6 +46,8 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
             return MainStudentUI(
               userRegister: userRegister,
             );
+          } else if (userRegister.currentAccountType == ConstantVariables.accountType[2]){
+            return HomeAssistantUI(userRegister: userRegister);
           } else {
             return Scaffold(
               appBar: AppBar(
@@ -66,7 +69,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                         _currentMenu = 2;
                       });
                     },
-                    child: ClipRRect(
+                    child: const ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(100.0)),
                       child: Icon(
                         Icons.account_circle,
@@ -74,7 +77,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20.0,
                   )
                 ],
@@ -85,7 +88,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                   padding: EdgeInsets.zero,
                   children: [
                     DrawerHeader(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.fill,
                               image: AssetImage('assets/ic_bg_drawer.jpg'))
@@ -106,17 +109,17 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                                 child: FadeInImage.assetNetwork(
                                   placeholder: 'assets/ic_teacher_male.png',
                                   image: ConstantVariables
-                                      .iconDefaultTeacherFemale,
+                                      .iconDefaultTeacherMale,
                                   width: 75.0,
                                   height: 75.0,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5.0,
                               ),
                               Text(
                                 userRegister.name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black87,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w700,
@@ -125,7 +128,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                               ),
                               Text(
                                 userRegister.email,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black87,
                                   fontFamily: 'Poppins',
                                   fontSize: 12.0,
@@ -138,7 +141,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('Home'),
-                      leading: Icon(Icons.home),
+                      leading: const Icon(Icons.home),
                       onTap: () {
                         setState(() {
                           _currentMenu = 1;
@@ -148,7 +151,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('Account'),
-                      leading: Icon(Icons.account_circle),
+                      leading: const Icon(Icons.account_circle),
                       onTap: () {
                         setState(() {
                           _currentMenu = 2;
@@ -158,7 +161,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('Classes'),
-                      leading: Icon(Icons.class_),
+                      leading: const Icon(Icons.class_),
                       onTap: () {
                         setState(() {
                           _currentMenu = 3;
@@ -168,7 +171,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('Students'),
-                      leading: Icon(Icons.school),
+                      leading: const Icon(Icons.school),
                       onTap: () {
                         setState(() {
                           _currentMenu = 4;
@@ -177,8 +180,8 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                       },
                     ),
                     ListTile(
-                      title: const Text('Notifications'),
-                      leading: Icon(Icons.notifications),
+                      title: const Text('Assistant'),
+                      leading: const Icon(Icons.assistant),
                       onTap: () {
                         setState(() {
                           _currentMenu = 5;
@@ -186,12 +189,12 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                         Navigator.pop(context);
                       },
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.grey,
                     ),
                     ListTile(
                       title: const Text('Settings'),
-                      leading: Icon(Icons.settings),
+                      leading: const Icon(Icons.settings),
                       onTap: () {
                         setState(() {
                           _currentMenu = 6;
@@ -201,7 +204,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('History'),
-                      leading: Icon(Icons.history),
+                      leading: const Icon(Icons.history),
                       onTap: () {
                         setState(() {
                           _currentMenu = 7;
@@ -214,7 +217,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('Share'),
-                      leading: Icon(Icons.share),
+                      leading: const Icon(Icons.share),
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Navigator.pop(context);
@@ -222,7 +225,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('Help'),
-                      leading: Icon(Icons.help),
+                      leading: const Icon(Icons.help),
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Navigator.pop(context);
@@ -230,7 +233,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('About'),
-                      leading: Icon(Icons.info),
+                      leading: const Icon(Icons.info),
                       onTap: () {
                         setState(() {
                           _currentMenu = 8;
@@ -240,7 +243,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                     ),
                     ListTile(
                       title: const Text('Logout'),
-                      leading: Icon(Icons.exit_to_app),
+                      leading: const Icon(Icons.exit_to_app),
                       onTap: () {
                         FutureBuilder<dynamic>(
                           future: _authenticationService.signOut(),
@@ -258,8 +261,6 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                 child: Column(
                   children: [
                     if (_currentMenu == 1) ...[
-                      WidgetEmailNotVerified(),
-                      // WidgetStartClass(),
                       // WidgetDashboard(),
                       SizedBox(
                         height: 20.0,

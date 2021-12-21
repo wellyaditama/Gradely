@@ -4,7 +4,7 @@ import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
-import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/ui/student/scan_attendance_student.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
 import 'package:gradely_app/widgets/widget_email_not_verified.dart';
 import 'package:provider/provider.dart';
@@ -23,8 +23,8 @@ class MainStudentUI extends StatefulWidget {
 
 class _MainStudentUIState extends State<MainStudentUI> {
   final AuthenticationService _authenticationService = AuthenticationService();
-  String _title = 'Gradely Student';
-  final SnackBar snackBar = SnackBar(content: Text('Coming soon!'));
+  final String _title = 'Gradely Student';
+  final SnackBar snackBar = const SnackBar(content: Text('Coming soon!'));
 
   int _currentMenu = 1;
 
@@ -39,7 +39,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
         actions: [
           IconButton(
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ScanAttendanceStudent(userRegister: widget.userRegister),));
             },
             icon: const Icon(
               Icons.qr_code_scanner,
@@ -52,7 +52,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
                 _currentMenu = 2;
               });
             },
-            child: ClipRRect(
+            child: const ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(100.0)),
               child: Icon(
                 Icons.account_circle,
@@ -71,15 +71,10 @@ class _MainStudentUIState extends State<MainStudentUI> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: AssetImage('assets/ic_bg_drawer.jpg'))
-                  // gradient: LinearGradient(
-                  //   begin: Alignment.topLeft,
-                  //   end: Alignment.bottomRight,
-                  //   colors: [Styles.primaryColor, Styles.primaryVariantColor],
-                  // ),
                   ),
               child: Stack(
                 children: [
@@ -96,12 +91,12 @@ class _MainStudentUIState extends State<MainStudentUI> {
                           height: 75.0,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5.0,
                       ),
                       Text(
                         widget.userRegister.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black87,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w700,
@@ -110,7 +105,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
                       ),
                       Text(
                         widget.userRegister.email,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black87,
                           fontFamily: 'Poppins',
                           fontSize: 12.0,

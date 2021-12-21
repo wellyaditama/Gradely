@@ -11,7 +11,7 @@ class AuthenticationWrapper extends StatefulWidget {
 }
 
 class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
-  bool showSignIn = false;
+  bool showSignIn = true;
 
   void toggleView() {
     setState(() {

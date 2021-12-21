@@ -121,18 +121,18 @@ class _ClassBeginState extends State<ClassBegin> {
                   ),
                 ),
               ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () async {
-                  Student student = Student('1234567891234567891234567891',
-                      'email@gmail.com', 'namaMahasiswa', DateTime.now());
-
-                  await DatabaseTeacherClass(widget.classroom.teacherID,
-                          widget.classroom.className)
-                      .addStudentToAttendance(student)
-                      .then((val) => print('success'));
-                },
-                child: Icon(Icons.share),
-              ),
+              // floatingActionButton: FloatingActionButton(
+              //   onPressed: () async {
+              //     Student student = Student('1234567891234567891234567891',
+              //         'email@gmail.com', 'namaMahasiswa', DateTime.now());
+              //
+              //     await DatabaseTeacherClass(widget.classroom.teacherID,
+              //             widget.classroom.className)
+              //         .addStudentToAttendance(student)
+              //         .then((val) => print('success'));
+              //   },
+              //   child: Icon(Icons.share),
+              // ),
             );
           }
         } else {
