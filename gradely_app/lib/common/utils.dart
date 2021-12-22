@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Utility {
   static bool validateEmail(String email) {
@@ -22,5 +23,13 @@ class Utility {
 
   static DateTime convertTimestamptToDateTime(Timestamp timestamp) {
     return DateTime.parse(timestamp.toDate().toString());
+  }
+
+  static launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

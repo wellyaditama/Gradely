@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
+import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
 import 'package:gradely_app/widgets/widget_big_qr_code_image.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -44,8 +45,10 @@ class _DetailStudentClassState extends State<DetailStudentClass> {
             icon: Icon(Icons.share),
           ),
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.edit),
+            onPressed: () async {
+              await DatabaseTeacherClass(widget.classroom.teacherID, widget.classroom.className).deleteClass(widget.classroom).then((value) => Navigator.pop(context));
+            },
+            icon: Icon(Icons.delete_outline_rounded),
           ),
           SizedBox(
             width: 10.0,

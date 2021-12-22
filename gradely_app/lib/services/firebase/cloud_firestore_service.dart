@@ -73,6 +73,42 @@ class DatabaseTeacherClass {
     }).catchError((e) => print(e.toString()));
   }
 
+  Future addStudentToClasses(UserRegister userRegister) async {
+    return await classCollection
+        .doc(uid)
+        .collection('students')
+        .doc(className)
+        .set({
+      'uid' : userRegister.uid,
+      'email' : userRegister.email,
+      'isVerified' : userRegister.isVerified,
+      'name' : userRegister.name,
+      'university' : userRegister.university,
+      'gender' : userRegister.gender,
+      'semester' : userRegister.semester,
+      'currentAccountType' : userRegister.currentAccountType,
+
+    }).catchError((e) => print(e.toString()));
+  }
+
+  Future addAssistantToClasses(UserRegister userRegister) async {
+    return await classCollection
+        .doc(uid)
+        .collection('assistant')
+        .doc(className)
+        .set({
+      'uid' : userRegister.uid,
+      'email' : userRegister.email,
+      'isVerified' : userRegister.isVerified,
+      'name' : userRegister.name,
+      'university' : userRegister.university,
+      'gender' : userRegister.gender,
+      'semester' : userRegister.semester,
+      'currentAccountType' : userRegister.currentAccountType,
+
+    }).catchError((e) => print(e.toString()));
+  }
+
   Future addStudentToAttendance(Student student) async {
     classCollection
         .doc(uid)
@@ -86,7 +122,10 @@ class DatabaseTeacherClass {
       'name': student.name,
       'attendanceTime': student.attendanceTime,
     }).catchError((e) => print(e.toString()));
-    ;
+  }
+
+  Future deleteClass(Classroom classroom) async {
+    classCollection.doc(uid).collection('teacherClasses').doc(className).delete().catchError((e) => print(e.toString()));
   }
 
   Stream<Classroom> get classroom {
@@ -118,55 +157,17 @@ class DatabaseTeacherClass {
 
   Stream<QuerySnapshot> get listClassroomTeacher {
     return classCollection.doc(uid).collection('teacherClasses').snapshots();
-    //     .map((event) {
-    //   List<Classroom> _listClassroom = [];
-    //
-    //   event.docs.forEach((doc) {
-    //     Classroom _classroom = Classroom(
-    //         doc['classname'],
-    //         doc['subjectName'],
-    //         doc['teacherName'],
-    //         doc['teacherID'],
-    //         doc['classPicture'],
-    //         doc['classBegin'],
-    //         doc['classEnd'],
-    //         doc['studentCount'],
-    //         doc['day'],
-    //         doc['classToken']);
-    //     _listClassroom.add(_classroom);
-    //   });
-    //
-    //   return _listClassroom;
-    // });
+  }
+
+  Stream<QuerySnapshot> get listStudentsTeacher {
+    return classCollection.doc(uid).collection('students').snapshots();
+  }
+
+  Stream<QuerySnapshot> get listAssistantTeacher {
+    return classCollection.doc(uid).collection('assistant').snapshots();
   }
 
   Future<bool> getClassroom() async {
-    // List<Classroom> _listClassroom = [];
-    //
-    // classCollection
-    //     .doc(uid)
-    //     .collection('teacherClasses')
-    //     .snapshots()
-    //     .map((event) {
-    //   for (var doc in event.docs) {
-    //     Classroom _classroom = Classroom(
-    //         doc['classname'],
-    //         doc['subjectName'],
-    //         doc['teacherName'],
-    //         doc['teacherID'],
-    //         doc['classPicture'],
-    //         doc['classBegin'],
-    //         doc['classEnd'],
-    //         doc['studentCount'],
-    //         doc['day'],
-    //         doc['classToken']);
-    //     _listClassroom.add(_classroom);
-    //   }
-    // });
-    //
-    // return _listClassroom;
-
-    // Check if the collection exist
 
     return classCollection
         .doc(uid)

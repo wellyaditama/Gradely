@@ -3,18 +3,18 @@ import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
-import 'package:gradely_app/ui/student/scan_qr_class.dart';
 
-class JoinClassUI extends StatefulWidget {
-  const JoinClassUI({Key? key, required this.userRegister}) : super(key: key);
+class JoinClassAssistantUI extends StatefulWidget {
+  const JoinClassAssistantUI({Key? key, required this.userRegister})
+      : super(key: key);
 
   final UserRegister userRegister;
 
   @override
-  _JoinClassUIState createState() => _JoinClassUIState();
+  _JoinClassAssistantUIState createState() => _JoinClassAssistantUIState();
 }
 
-class _JoinClassUIState extends State<JoinClassUI> {
+class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
   final _formKey = GlobalKey<FormState>();
   String classToken = '';
   bool loading = false;
@@ -30,13 +30,13 @@ class _JoinClassUIState extends State<JoinClassUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Join Class'),
+        title: const Text('Join Class'),
         backgroundColor: Styles.primaryColor,
       ),
       body: Form(
         key: _formKey,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           width: double.infinity,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -44,17 +44,17 @@ class _JoinClassUIState extends State<JoinClassUI> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Visibility(
-                child: LinearProgressIndicator(
+                child: const LinearProgressIndicator(
                   color: Styles.secondaryColor,
                   backgroundColor: Styles.primaryVariantColor,
                   minHeight: 5.0,
                 ),
                 visible: loading,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
-              Text(
+              const Text(
                 'Input your Token Class',
                 style: TextStyle(
                   fontSize: 20.0,
@@ -63,7 +63,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                   color: Styles.primaryColor,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
               TextFormField(
@@ -83,7 +83,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                     return 'Wrong token!';
                   }
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.app_registration),
                   hintText: 'Class Token',
                   fillColor: Colors.white,
@@ -104,7 +104,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
@@ -121,17 +121,19 @@ class _JoinClassUIState extends State<JoinClassUI> {
                         setState(() {
                           loading = !loading;
                         });
+
                         String token = classToken;
                         String teacherUID = token.substring(0, 28);
                         String className = token.substring(28, 33);
-                        String classToken2 = token.substring(34);
-                        int length = token.length;
 
-                        if(value) {
-                          AddNewClass(teacherUID, className, widget.userRegister);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Success!')));
+                        if (value) {
+                          AddNewClass(
+                              teacherUID, className, widget.userRegister);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Success!')));
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed!')));
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text('Failed!')));
                         }
 
                         return value;
@@ -139,7 +141,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                     }
                   },
                   style: ElevatedButton.styleFrom(primary: Styles.primaryColor),
-                  child: Text(
+                  child: const Text(
                     'Join',
                     style: TextStyle(
                         color: Colors.white,
@@ -148,15 +150,15 @@ class _JoinClassUIState extends State<JoinClassUI> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
-                    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => ScanQRClass(setData: setData,),));
-                    textController.text = result;
+                    // final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => ScanQRClass(setData: setData,),));
+                    // textController.text = result;
                   },
                   style: ElevatedButton.styleFrom(primary: Styles.primaryColor),
-                  child: Text(
+                  child: const Text(
                     'Scan QR',
                     style: TextStyle(
                         color: Colors.white,
@@ -178,12 +180,17 @@ class _JoinClassUIState extends State<JoinClassUI> {
     });
   }
 
-  void AddNewClass(String teacherUID, String className, UserRegister userRegister) async {
-    Classroom? classroom = await DatabaseTeacherClass(teacherUID, className).getClass().then((value) {
-      if(value != null) {
-        DatabaseTeacherClass(userRegister.uid, className).updateTeacherClassData(value);
+  void AddNewClass(
+      String teacherUID, String className, UserRegister userRegister) async {
+    Classroom? classroom = await DatabaseTeacherClass(teacherUID, className)
+        .getClass()
+        .then((value) {
+      if (value != null) {
+        DatabaseTeacherClass(userRegister.uid, className)
+            .updateTeacherClassData(value);
         print(value.className);
-        DatabaseTeacherClass(teacherUID, className).addStudentToClasses(userRegister);
+        DatabaseTeacherClass(teacherUID, className)
+            .addAssistantToClasses(userRegister);
       }
     });
   }

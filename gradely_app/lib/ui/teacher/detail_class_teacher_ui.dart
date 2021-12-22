@@ -50,15 +50,55 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
         actions: [
           IconButton(
             onPressed: () {
-              shareQRCode('Join to class ' + widget.classroom.subjectName + ' ' + widget.classroom.className + '\nToken : $qrData');
+              shareQRCode('Join to class ' +
+                  widget.classroom.subjectName +
+                  ' ' +
+                  widget.classroom.className +
+                  '\nToken : $qrData');
             },
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
           ),
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.edit),
+            onPressed: () {
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Text(
+                    'Do you want to delete ' +
+                        widget.classroom.className.toString(),
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontFamily: 'Poppins',
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  content: const Text(
+                    'This action cannot be undone! Please proceed with careful',
+                    style: TextStyle(
+                      color: Colors.black45,
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        await DatabaseTeacherClass(widget.classroom.teacherID, widget.classroom.className).deleteClass(widget.classroom).then((value) => Navigator.pop(context));
+                      },
+                      child: const Text('Delete'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            icon: const Icon(Icons.delete_outline_rounded),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10.0,
           )
         ],
@@ -104,8 +144,8 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                   hintText: widget.classroom.subjectName,
                   fillColor: Colors.white,
                   filled: true,
-                  contentPadding: EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10.0),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
@@ -149,8 +189,8 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                   hintText: widget.classroom.className,
                   fillColor: Colors.white,
                   filled: true,
-                  contentPadding: EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10.0),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
@@ -194,8 +234,8 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                   hintText: widget.classroom.teacherName,
                   fillColor: Colors.white,
                   filled: true,
-                  contentPadding: EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10.0),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
@@ -239,8 +279,8 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                   hintText: widget.classroom.day,
                   fillColor: Colors.white,
                   filled: true,
-                  contentPadding: EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10.0),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
@@ -264,7 +304,9 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  'Class Begin : ' + Utility.convertDateTimeToString(widget.classroom.classBegin),
+                  'Class Begin : ' +
+                      Utility.convertDateTimeToString(
+                          widget.classroom.classBegin),
                   style: TextStyle(
                     color: Colors.black54,
                     fontFamily: 'Poppins',
@@ -280,7 +322,9 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  'Class End : ' + Utility.convertDateTimeToString(widget.classroom.classEnd),
+                  'Class End : ' +
+                      Utility.convertDateTimeToString(
+                          widget.classroom.classEnd),
                   style: TextStyle(
                     color: Colors.black54,
                     fontFamily: 'Poppins',
@@ -298,12 +342,16 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ClassBegin(classroom: widget.classroom),));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ClassBegin(classroom: widget.classroom),
+                        ));
                   },
                   child: Text('Begin this Class'),
                 ),
               ),
-
             ],
           ),
         ),

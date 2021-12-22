@@ -5,10 +5,10 @@ import 'package:gradely_app/ui/teacher/detail_class_teacher_ui.dart';
 
 import '../widget_small_qr_code_image.dart';
 
-class ClassesListItem extends StatelessWidget {
+class ClassesListTile extends StatelessWidget {
   final Classroom classroom;
 
-  const ClassesListItem({Key? key, required this.classroom}) : super(key: key);
+  const ClassesListTile({Key? key, required this.classroom}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

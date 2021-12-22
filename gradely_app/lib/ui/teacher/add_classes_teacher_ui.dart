@@ -31,7 +31,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
   DateTime classEnd = DateTime.now().add(Duration(hours: 1));
   String formatedClassEnd = '';
   int studentCount = 0;
-  String day = '';
+  String day = 'Monday';
   String classToken = '';
 
   @override
@@ -259,36 +259,32 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                   SizedBox(
                     height: 8.0,
                   ),
-                  TextFormField(
-                    onChanged: (value) {
-                      day = value;
-                    },
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return ('Please fill the Day!');
-                      }
-                    },
-                    enabled: true,
+                  DropdownButtonFormField(
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.event),
-                      hintText: 'Ex : Monday..',
                       fillColor: Colors.white,
                       filled: true,
-                      contentPadding: EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                        borderSide: BorderSide(
-                            color: Styles.primaryVariantColor, width: 2.0),
+                        borderSide: BorderSide(color: Styles.primaryColor, width: 2.0),
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 2.0),
                       ),
                     ),
+                    value: ConstantVariables.dayInWeek[0],
+                    hint: Text('Choose one'),
+                    onChanged: (value) {
+                      setState(() {
+                        day = value.toString();
+                      });
+                    },
+                    onSaved: (value) {
+                      setState(() {
+                        day = value.toString();
+                      });
+                    },
+                    items: ConstantVariables.dayInWeek.map((String val) {
+                      return DropdownMenuItem(value: val, child: Text(val));
+                    }).toList(),
                   ),
                   SizedBox(
                     height: 8.0,
@@ -429,10 +425,6 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                       primary: Colors.white,
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Check'),
-                  )
                 ],
               ),
             ),

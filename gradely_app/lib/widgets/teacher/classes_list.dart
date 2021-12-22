@@ -4,7 +4,7 @@ import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:provider/provider.dart';
 
-import 'classes_list_item.dart';
+import 'classes_list_tile.dart';
 
 class ClassesList extends StatefulWidget {
   final List<Classroom> classrooms;
@@ -25,7 +25,7 @@ class _ClassesListState extends State<ClassesList> {
       shrinkWrap: true,
       itemCount: widget.classrooms.length,
       itemBuilder: (BuildContext context, int index) {
-        return ClassesListItem(classroom: widget.classrooms[index],);
+        return ClassesListTile(classroom: widget.classrooms[index],);
       },
     );
   }

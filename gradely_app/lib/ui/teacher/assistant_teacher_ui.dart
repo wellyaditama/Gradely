@@ -7,20 +7,20 @@ import 'package:gradely_app/widgets/teacher/students_list.dart';
 import 'package:gradely_app/widgets/widget_loading_screens.dart';
 import 'package:provider/provider.dart';
 
-class StudentTeacherUI extends StatefulWidget {
-  const StudentTeacherUI({Key? key}) : super(key: key);
+class AssistantTeacherUI extends StatefulWidget {
+  const AssistantTeacherUI({Key? key}) : super(key: key);
 
   @override
-  _StudentTeacherUIState createState() => _StudentTeacherUIState();
+  _AssistantTeacherUIState createState() => _AssistantTeacherUIState();
 }
 
-class _StudentTeacherUIState extends State<StudentTeacherUI> {
+class _AssistantTeacherUIState extends State<AssistantTeacherUI> {
   @override
   Widget build(BuildContext context) {
     final uid = Provider.of<UserUID?>(context);
 
     return StreamBuilder<QuerySnapshot>(
-      stream: DatabaseTeacherClass(uid!.uid, '').listStudentsTeacher,
+      stream: DatabaseTeacherClass(uid!.uid, '').listAssistantTeacher,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.size == 0) {

@@ -7,13 +7,16 @@ import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
-import 'package:gradely_app/ui/assistant/home_assistant_ui.dart';
+import 'package:gradely_app/ui/assistant/main_assistant_ui.dart';
 import 'package:gradely_app/ui/student/main_student_ui.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
+import 'package:gradely_app/ui/teacher/students_teacher_ui.dart';
 import 'package:gradely_app/widgets/widget_email_not_verified.dart';
 import 'package:gradely_app/widgets/widget_loading_screens.dart';
 import 'package:provider/provider.dart';
+import '../about_ui.dart';
 import 'add_classes_teacher_ui.dart';
+import 'assistant_teacher_ui.dart';
 import 'classes_teacher_ui.dart';
 
 class HomeTeacherUI extends StatefulWidget {
@@ -46,7 +49,8 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
             return MainStudentUI(
               userRegister: userRegister,
             );
-          } else if (userRegister.currentAccountType == ConstantVariables.accountType[2]){
+          } else if (userRegister.currentAccountType ==
+              ConstantVariables.accountType[2]) {
             return HomeAssistantUI(userRegister: userRegister);
           } else {
             return Scaffold(
@@ -108,8 +112,8 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                                 borderRadius: BorderRadius.circular(100.0),
                                 child: FadeInImage.assetNetwork(
                                   placeholder: 'assets/ic_teacher_male.png',
-                                  image: ConstantVariables
-                                      .iconDefaultTeacherMale,
+                                  image:
+                                      ConstantVariables.iconDefaultTeacherMale,
                                   width: 75.0,
                                   height: 75.0,
                                 ),
@@ -269,7 +273,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         width: double.infinity,
                         child: Text(
-                          'All the Classes',
+                          'Your Classes',
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w700,
@@ -293,7 +297,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         width: double.infinity,
                         child: Text(
-                          'Recent activity : ',
+                          'Your Assistant : ',
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w700,
@@ -303,49 +307,22 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                           textAlign: TextAlign.start,
                         ),
                       ),
+                      AssistantTeacherUI(),
                       TextButton(
                           onPressed: () {
                             setState(() {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text('Coming Soon'),
-                              ));
+                              setState(() {
+                                _currentMenu = 5;
+                              });
                             });
                           },
                           child: Text('Show More')),
-                      Divider(),
                       Divider(),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         width: double.infinity,
                         child: Text(
-                          'Your assistant : ',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black54,
-                            fontSize: 20.0,
-                          ),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            setState(() {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text('Coming Soon'),
-                              ));
-                            });
-                          },
-                          child: Text('Show More')),
-                      Divider(),
-                      Divider(),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        width: double.infinity,
-                        child: Text(
-                          'Statistics : ',
+                          'Recent Activity : ',
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w700,
@@ -393,11 +370,9 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                         ),
                       )
                     ] else if (_currentMenu == 4) ...[
-                      Container(child: Text('This is menu 4')),
-                      Container(child: Text('this is content menu 4')),
+                      StudentTeacherUI(),
                     ] else if (_currentMenu == 5) ...[
-                      Container(child: Text('This is menu 5')),
-                      Container(child: Text('this is content menu 5')),
+                      AssistantTeacherUI(),
                     ] else if (_currentMenu == 6) ...[
                       Container(child: Text('This is menu 6')),
                       Container(child: Text('this is content menu 6')),
@@ -405,8 +380,7 @@ class _HomeTeacherUIState extends State<HomeTeacherUI> {
                       Container(child: Text('This is menu 7')),
                       Container(child: Text('this is content menu 7')),
                     ] else if (_currentMenu == 8) ...[
-                      Container(child: Text('This is menu 8')),
-                      Container(child: Text('this is content menu 8')),
+                      AboutUI(),
                     ] else ...[
                       WidgetLoadingScreens(),
                     ]

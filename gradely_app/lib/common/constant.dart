@@ -7,4 +7,5 @@ class ConstantVariables {
   static final String iconDefaultAssistantMale = 'https://firebasestorage.googleapis.com/v0/b/gradely-d1db3.appspot.com/o/account%2FprofilePicture%2Fic_assistant_male.png?alt=media&token=c7cdad1a-9626-41b9-9eab-757c4c06a91f';
 
   static final List<String> accountType = ['Student', 'Teacher', 'Assistant'];
+  static final List<String> dayInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 }

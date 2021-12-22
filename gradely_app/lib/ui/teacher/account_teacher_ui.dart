@@ -58,7 +58,7 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Teacher Name :  ',
+                        'Name :  ',
                         style: TextStyle(
                           color: Colors.black54,
                           fontFamily: 'Poppins',

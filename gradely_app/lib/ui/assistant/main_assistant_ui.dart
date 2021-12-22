@@ -2,37 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:gradely_app/common/constant.dart';
 import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/model/user_register.dart';
-import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
+import 'package:gradely_app/ui/student/classes_student_ui.dart';
 import 'package:gradely_app/ui/student/scan_attendance_student.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
-import 'package:gradely_app/widgets/widget_email_not_verified.dart';
-import 'package:provider/provider.dart';
 
 import '../about_ui.dart';
-import 'classes_student_ui.dart';
-import 'join_class_ui.dart';
+import 'join_class_assistant_ui.dart';
 
-class MainStudentUI extends StatefulWidget {
+class HomeAssistantUI extends StatefulWidget {
+  const HomeAssistantUI({Key? key, required this.userRegister}) : super(key: key);
+
   final UserRegister userRegister;
 
-  const MainStudentUI({Key? key, required this.userRegister}) : super(key: key);
-
   @override
-  _MainStudentUIState createState() => _MainStudentUIState();
+  State<HomeAssistantUI> createState() => _HomeAssistantUIState();
 }
 
-class _MainStudentUIState extends State<MainStudentUI> {
+class _HomeAssistantUIState extends State<HomeAssistantUI> {
+
   final AuthenticationService _authenticationService = AuthenticationService();
-  final String _title = 'Gradely Student';
+  final String _title = 'Gradely Assistant';
   final SnackBar snackBar = const SnackBar(content: Text('Coming soon!'));
 
-  int _currentMenu = 7;
+  int _currentMenu = 1;
 
   @override
   Widget build(BuildContext context) {
-    final uid = Provider.of<UserUID?>(context);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Styles.primaryColor,
@@ -53,7 +49,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
                 _currentMenu = 2;
               });
             },
-            child: const ClipRRect(
+            child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(100.0)),
               child: Icon(
                 Icons.account_circle,
@@ -76,7 +72,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: AssetImage('assets/ic_bg_drawer.jpg'))
-                  ),
+              ),
               child: Stack(
                 children: [
                   Column(
@@ -87,7 +83,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
                         borderRadius: BorderRadius.circular(100.0),
                         child: FadeInImage.assetNetwork(
                           placeholder: 'assets/ic_teacher_male.png',
-                          image: ConstantVariables.iconDefaultStudentMale,
+                          image: ConstantVariables.iconDefaultAssistantMale,
                           width: 75.0,
                           height: 75.0,
                         ),
@@ -247,32 +243,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
                 ),
               ),
               Divider(),
-              ClassesStudentUI(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                width: double.infinity,
-                child: Text(
-                  'Recent Activity : ',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black54,
-                    fontSize: 20.0,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(
-                        content: Text('Coming Soon'),
-                      ));
-                    });
-                  },
-                  child: Text('Show More')),
-              Divider(),
+              ClassesStudentUI()
             ] else if (_currentMenu == 2) ...[
               AccountTeacherUI(),
             ] else if (_currentMenu == 3) ...[
@@ -282,7 +253,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
                 onPressed: () {
                   UserRegister _userRegister = widget.userRegister;
 
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => JoinClassUI(userRegister: _userRegister,),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => JoinClassAssistantUI(userRegister: _userRegister,),));
                 },
               ),
             ] else if (_currentMenu == 4) ...[
