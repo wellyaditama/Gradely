@@ -3,6 +3,7 @@ import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
+import 'package:gradely_app/ui/authentication/reset_password_form.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -163,7 +164,9 @@ class _LoginUIState extends State<LoginUI> {
                           height: 10.0,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            _showResetPassword();
+                          },
                           child: Container(
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -235,4 +238,14 @@ class _LoginUIState extends State<LoginUI> {
       ),
     );
   }
+
+  void _showResetPassword() {
+    showModalBottomSheet(context: context, builder: (context) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+        child: ResetPasswordForm(),
+      );
+    });
+  }
+
 }

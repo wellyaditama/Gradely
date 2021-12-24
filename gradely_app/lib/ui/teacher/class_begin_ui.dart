@@ -4,9 +4,14 @@ import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/students.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/ui/teacher/start_review_session_teacher_ui.dart';
+import 'package:gradely_app/widgets/teacher/list_active_student_attending.dart';
+import 'package:gradely_app/widgets/teacher/list_assistant_attending.dart';
 import 'package:gradely_app/widgets/teacher/list_student_attending.dart';
 import 'package:gradely_app/widgets/widget_big_qr_code_image.dart';
 import 'package:gradely_app/widgets/widget_loading_screens.dart';
+
+import 'add_active_point_teacher_ui.dart';
 
 class ClassBegin extends StatefulWidget {
   const ClassBegin({Key? key, required this.classroom}) : super(key: key);
@@ -31,16 +36,6 @@ class _ClassBeginState extends State<ClassBegin> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.size == 0) {
-            return Scaffold(
-              body: Container(
-                  child: Column(
-                children: [
-                  Image.asset('assets/ic_undraw_scan.png'),
-                  Text('No student attend this subject!')
-                ],
-              )),
-            );
-          } else {
             return Scaffold(
               body: SafeArea(
                 child: SingleChildScrollView(
@@ -99,11 +94,87 @@ class _ClassBeginState extends State<ClassBegin> {
                       SizedBox(
                         height: 20.0,
                       ),
+                      Image.asset('assets/ic_undraw_scan.png'),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 20.0),
+                        child: const Text(
+                          'No student attend this subject! Share your QR Code!',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 14.0,
+                              color: Colors.black54),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return Scaffold(
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  physics: ScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        child: Card(
+                          color: Styles.accentColor2,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              WidgetBigQRCodeImage(qrData: qrdata),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Text(
+                                widget.classroom.subjectName,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                  fontSize: 26.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Text(
+                                widget.classroom.className,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16.0,
+                              ),
+                              Text(
+                                widget.classroom.teacherName,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         width: double.infinity,
-                        child: Text(
-                          'Students Attending : ',
+                        child: const Text(
+                          'Assistant Attending : ',
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w700,
@@ -114,25 +185,121 @@ class _ClassBeginState extends State<ClassBegin> {
                         ),
                       ),
                       Divider(),
+                      ListAssistantAttending(
+                        className: widget.classroom.className,
+                        teacherID: widget.classroom.teacherID,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: const Text(
+                          'Students Attending : ',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black54,
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      const Divider(),
                       ListStudentAttending(
                         listStudent: listStudentFromSnapshot(snapshot),
                       ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: const Text(
+                          "Today's Active Students : ",
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black54,
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      const Divider(),
+                      ListActiveStudentAttending(
+                        className: widget.classroom.className,
+                        teacherID: widget.classroom.teacherID,
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddActivePointTeacherUI(
+                                  classroom: widget.classroom,
+                                  listStudent:
+                                      listStudentFromSnapshot(snapshot),
+                                ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.star_rate,
+                            color: Colors.white,
+                          ),
+                          label: const Text('Add Activity Points'),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    StartReviewSessionTeacherUI(
+                                  classroom: widget.classroom,
+                                  listStudent:
+                                      listStudentFromSnapshot(snapshot),
+                                ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.app_registration),
+                          label: const Text('Start Review Session'),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () async {
+                            await DatabaseTeacherClass(
+                                    widget.classroom.teacherID,
+                                    widget.classroom.className)
+                                .removeAllCollection().then((value) => Navigator.pop(context));
+                          },
+                          icon: const Icon(Icons.done_all_rounded),
+                          label: const Text('End Today Class'),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      )
                     ],
                   ),
                 ),
               ),
-              // floatingActionButton: FloatingActionButton(
-              //   onPressed: () async {
-              //     Student student = Student('1234567891234567891234567891',
-              //         'email@gmail.com', 'namaMahasiswa', DateTime.now());
-              //
-              //     await DatabaseTeacherClass(widget.classroom.teacherID,
-              //             widget.classroom.className)
-              //         .addStudentToAttendance(student)
-              //         .then((val) => print('success'));
-              //   },
-              //   child: Icon(Icons.share),
-              // ),
             );
           }
         } else {

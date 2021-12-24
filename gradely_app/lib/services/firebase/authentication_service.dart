@@ -50,4 +50,12 @@ class AuthenticationService {
       debugPrint(e.toString());
     }
   }
+
+  Future resetPassword(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

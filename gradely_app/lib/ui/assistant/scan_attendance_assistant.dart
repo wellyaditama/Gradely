@@ -9,17 +9,16 @@ import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class ScanAttendanceStudent extends StatefulWidget {
+class ScanAttendanceAssistant extends StatefulWidget {
+  const ScanAttendanceAssistant({Key? key, required this.userRegister}) : super(key: key);
   final UserRegister userRegister;
 
-  const ScanAttendanceStudent({Key? key, required this.userRegister})
-      : super(key: key);
-
   @override
-  State<StatefulWidget> createState() => _ScanAttendanceStudentState();
+  _ScanAttendanceAssistantState createState() => _ScanAttendanceAssistantState();
 }
 
-class _ScanAttendanceStudentState extends State<ScanAttendanceStudent> {
+class _ScanAttendanceAssistantState extends State<ScanAttendanceAssistant> {
+
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -53,14 +52,14 @@ class _ScanAttendanceStudentState extends State<ScanAttendanceStudent> {
                       onTap: () async {
                         String? token = result!.code;
                         String teacherUID = token!.substring(0, 28);
-                        String className = token.substring(28, 33);
+                        String className = token!.substring(28, 33);
                         Student student = Student(
                             widget.userRegister.uid,
                             widget.userRegister.email,
                             widget.userRegister.name,
                             DateTime.now());
                         await DatabaseTeacherClass(teacherUID, className)
-                            .addStudentToAttendance(student)
+                            .addAssistantToAttendance(student)
                             .then((val) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('Success attend the meeting!')));
@@ -175,7 +174,7 @@ class _ScanAttendanceStudentState extends State<ScanAttendanceStudent> {
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
+        MediaQuery.of(context).size.height < 400)
         ? 150.0
         : 300.0;
     // To ensure the Scanner view is properly sizes after rotation

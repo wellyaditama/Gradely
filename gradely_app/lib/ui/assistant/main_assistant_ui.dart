@@ -3,8 +3,8 @@ import 'package:gradely_app/common/constant.dart';
 import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
+import 'package:gradely_app/ui/assistant/scan_attendance_assistant.dart';
 import 'package:gradely_app/ui/student/classes_student_ui.dart';
-import 'package:gradely_app/ui/student/scan_attendance_student.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
 
 import '../about_ui.dart';
@@ -36,7 +36,7 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ScanAttendanceStudent(userRegister: widget.userRegister),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ScanAttendanceAssistant(userRegister: widget.userRegister),));
             },
             icon: const Icon(
               Icons.qr_code_scanner,
@@ -49,7 +49,7 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
                 _currentMenu = 2;
               });
             },
-            child: ClipRRect(
+            child: const ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(100.0)),
               child: Icon(
                 Icons.account_circle,
@@ -57,7 +57,7 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20.0,
           )
         ],

@@ -27,7 +27,7 @@ class _MainStudentUIState extends State<MainStudentUI> {
   final String _title = 'Gradely Student';
   final SnackBar snackBar = const SnackBar(content: Text('Coming soon!'));
 
-  int _currentMenu = 7;
+  int _currentMenu = 1;
 
   @override
   Widget build(BuildContext context) {

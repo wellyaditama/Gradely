@@ -14,7 +14,7 @@ class OnboardingScreensUI extends StatelessWidget {
           PageViewModel(
             title: 'Welcome!',
             body:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar.',
+                'Hi, welcome to our Application. We will introduce your to our App!',
             image: Image.asset('assets/ic_undraw_welcome.png'),
             decoration: PageDecoration(
               pageColor: Colors.white,
@@ -25,7 +25,7 @@ class OnboardingScreensUI extends StatelessWidget {
           PageViewModel(
             title: 'Easy',
             body:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar.',
+                'Gradely made your Practicum easy!',
             image: Image.asset('assets/ic_undraw_control.png'),
             decoration: PageDecoration(
               pageColor: Colors.white,
@@ -36,7 +36,7 @@ class OnboardingScreensUI extends StatelessWidget {
           PageViewModel(
             title: 'Time Efficient',
             body:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar.',
+                'Attend to your Class faster just by scanning the QR Code!',
             image: Image.asset('assets/ic_undraw_time.png'),
             decoration: PageDecoration(
               pageColor: Colors.white,
@@ -47,7 +47,7 @@ class OnboardingScreensUI extends StatelessWidget {
           PageViewModel(
             title: 'Just Scan',
             body:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar.',
+                'Just scan the QR Code and you ready to go!',
             image: Image.asset('assets/ic_undraw_scan.png'),
             decoration: PageDecoration(
               pageColor: Colors.white,
@@ -58,7 +58,7 @@ class OnboardingScreensUI extends StatelessWidget {
           PageViewModel(
             title: 'Register Now!',
             body:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar.',
+                'Register by clicking the button bellow!',
             image: Image.asset('assets/ic_undraw_signin.png'),
             decoration: PageDecoration(
               pageColor: Colors.white,
