@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gradely_app/common/constant.dart';
 import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
 import 'package:gradely_app/ui/assistant/scan_attendance_assistant.dart';
 import 'package:gradely_app/ui/student/classes_student_ui.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../about_ui.dart';
 import 'join_class_assistant_ui.dart';
@@ -143,20 +145,20 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
                 Navigator.pop(context);
               },
             ),
+            const Divider(),
             ListTile(
               title: const Text('Share'),
               leading: Icon(Icons.share),
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                Navigator.pop(context);
+                String message = 'Gradely is an App that help your practicum session easy\nDownload Gradely from this link: \nhttps://drive.google.com/drive/folders/1Q5J0obDb_wflpQm-reElVbMR-Ic1QGbm?usp=sharing';
+                Share.share(message);
               },
             ),
             ListTile(
               title: const Text('Help'),
               leading: Icon(Icons.help),
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                Navigator.pop(context);
+                Utility.launchURL('https://drive.google.com/drive/folders/1Ulan6Jh3UEiMv9Lt4KqjKzT2RG3riFoG?usp=sharing');
               },
             ),
             ListTile(

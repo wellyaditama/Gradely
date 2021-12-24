@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradely_app/common/constant.dart';
 import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
@@ -8,6 +9,7 @@ import 'package:gradely_app/ui/student/scan_attendance_student.dart';
 import 'package:gradely_app/ui/teacher/account_teacher_ui.dart';
 import 'package:gradely_app/widgets/widget_email_not_verified.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../about_ui.dart';
 import 'classes_student_ui.dart';
@@ -154,16 +156,15 @@ class _MainStudentUIState extends State<MainStudentUI> {
               title: const Text('Share'),
               leading: Icon(Icons.share),
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                Navigator.pop(context);
+                String message = 'Gradely is an App that help your practicum session easy\nDownload Gradely from this link: \nhttps://drive.google.com/drive/folders/1Q5J0obDb_wflpQm-reElVbMR-Ic1QGbm?usp=sharing';
+                Share.share(message);
               },
             ),
             ListTile(
               title: const Text('Help'),
               leading: Icon(Icons.help),
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                Navigator.pop(context);
+                Utility.launchURL('https://drive.google.com/drive/folders/1Ulan6Jh3UEiMv9Lt4KqjKzT2RG3riFoG?usp=sharing');
               },
             ),
             ListTile(
@@ -215,31 +216,6 @@ class _MainStudentUIState extends State<MainStudentUI> {
               ),
               Divider(),
               ClassesStudentUI(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                width: double.infinity,
-                child: Text(
-                  'Recent Activity : ',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black54,
-                    fontSize: 20.0,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(
-                        content: Text('Coming Soon'),
-                      ));
-                    });
-                  },
-                  child: Text('Show More')),
-              Divider(),
             ] else if (_currentMenu == 2) ...[
               AccountTeacherUI(),
             ] else if (_currentMenu == 3) ...[

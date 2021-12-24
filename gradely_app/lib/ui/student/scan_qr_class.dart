@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gradely_app/common/styles.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanQRClass extends StatefulWidget {
@@ -52,7 +53,34 @@ class _ScanQRClassState extends State<ScanQRClass> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('QR Code : ${result!.code}'),
+                          Container(
+                            padding: EdgeInsets.all(10.0),
+                            color: Styles.primaryColor,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Subject Code : ${result!.code}',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(
+                                  'Tap to join this class',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     )

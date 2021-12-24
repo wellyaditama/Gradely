@@ -3,6 +3,7 @@ import 'package:gradely_app/common/styles.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/ui/student/scan_qr_class.dart';
 
 class JoinClassAssistantUI extends StatefulWidget {
   const JoinClassAssistantUI({Key? key, required this.userRegister})
@@ -154,8 +155,8 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
-                    // final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => ScanQRClass(setData: setData,),));
-                    // textController.text = result;
+                    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => ScanQRClass(setData: setData,),));
+                    textController.text = result;
                   },
                   style: ElevatedButton.styleFrom(primary: Styles.primaryColor),
                   child: const Text(
