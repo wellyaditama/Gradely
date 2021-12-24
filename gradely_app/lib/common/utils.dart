@@ -25,6 +25,13 @@ class Utility {
     return DateTime.parse(timestamp.toDate().toString());
   }
 
+  static convertDateToYmd(DateTime date) => DateFormat.yMd().format(date);
+
+  static convertDateToID(DateTime date) => DateFormat('ddMMyyyyHHmm').format(date);
+
+  static convertDateTo12HFormat(DateTime date) => DateFormat('MM/dd/yyyy hh:mm a').format(date);
+  static convertDateToTime(DateTime date) => DateFormat('HH:mm:ss').format(date);
+
   static launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);

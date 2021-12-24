@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
+import 'package:gradely_app/model/history.dart';
 import 'package:gradely_app/model/students.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
+import 'package:gradely_app/services/pdf/pdf_api.dart';
+import 'package:gradely_app/services/pdf/pdf_attendance.dart';
 import 'package:gradely_app/ui/teacher/start_review_session_teacher_ui.dart';
 import 'package:gradely_app/widgets/teacher/list_active_student_attending.dart';
 import 'package:gradely_app/widgets/teacher/list_assistant_attending.dart';
@@ -284,10 +288,17 @@ class _ClassBeginState extends State<ClassBegin> {
                         width: double.infinity,
                         child: ElevatedButton.icon(
                           onPressed: () async {
+
+                            String detail = 'Teacher Name : ' + widget.classroom.teacherName + ', Classname : ' + widget.classroom.className;
+
+                            final pdfFile = await PdfAttendance.generate(widget.classroom, listStudentFromSnapshot(snapshot));
+                            await DatabaseTeacherClass(widget.classroom.teacherID, widget.classroom.className).addTeacherHistory(TeacherHistory('Practicum Session', detail, Utility.convertDateTo12HFormat(DateTime.now())));
                             await DatabaseTeacherClass(
                                     widget.classroom.teacherID,
                                     widget.classroom.className)
                                 .removeAllCollection().then((value) => Navigator.pop(context));
+
+                            PdfApi.openFile(pdfFile);
                           },
                           icon: const Icon(Icons.done_all_rounded),
                           label: const Text('End Today Class'),

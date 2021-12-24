@@ -147,39 +147,6 @@ class _MainStudentUIState extends State<MainStudentUI> {
                 Navigator.pop(context);
               },
             ),
-            ListTile(
-              title: const Text('Notifications'),
-              leading: Icon(Icons.notifications),
-              onTap: () {
-                setState(() {
-                  _currentMenu = 4;
-                });
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              color: Colors.grey,
-            ),
-            ListTile(
-              title: const Text('Settings'),
-              leading: Icon(Icons.settings),
-              onTap: () {
-                setState(() {
-                  _currentMenu = 5;
-                });
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('History'),
-              leading: Icon(Icons.history),
-              onTap: () {
-                setState(() {
-                  _currentMenu = 6;
-                });
-                Navigator.pop(context);
-              },
-            ),
             Divider(
               color: Colors.grey,
             ),

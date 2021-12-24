@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
+import 'package:gradely_app/model/history.dart';
 import 'package:gradely_app/model/student_grade.dart';
 import 'package:gradely_app/model/students.dart';
 import 'package:gradely_app/model/user_register.dart';
@@ -136,6 +137,20 @@ class DatabaseTeacherClass {
       'name': student.name,
       'attendanceTime': student.attendanceTime,
     }).catchError((e) => print(e.toString()));
+  }
+
+  Future addTeacherHistory(TeacherHistory teacherHistory) async {
+    classCollection
+        .doc(uid)
+        .collection('history')
+        .doc(Utility.convertDateToID(DateTime.now()))
+        .set({
+      'title' : teacherHistory.title,
+      'description' : teacherHistory.description,
+      'date' : Utility.convertDateTo12HFormat(DateTime.now()),
+
+    }).catchError((e) => print(e.toString()));
+
   }
 
   Future addStudentToActiveStudent(Student student) async {
@@ -322,6 +337,10 @@ class DatabaseTeacherClass {
 
   Stream<QuerySnapshot> get listAssistantTeacher {
     return classCollection.doc(uid).collection('assistant').snapshots();
+  }
+
+  Stream<QuerySnapshot> get listHistoryTeacher {
+    return classCollection.doc(uid).collection('history').snapshots();
   }
 
 
