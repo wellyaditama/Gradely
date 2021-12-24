@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/history.dart';
@@ -49,7 +49,7 @@ class _ClassBeginState extends State<ClassBegin> {
                       Container(
                         width: double.infinity,
                         child: Card(
-                          color: Styles.accentColor2,
+                          color: StyleColors.accentColor2,
                           child: Column(
                             children: [
                               SizedBox(
@@ -125,7 +125,7 @@ class _ClassBeginState extends State<ClassBegin> {
                       Container(
                         width: double.infinity,
                         child: Card(
-                          color: Styles.accentColor2,
+                          color: StyleColors.accentColor2,
                           child: Column(
                             children: [
                               SizedBox(

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/students.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
@@ -61,29 +61,29 @@ class _ScanAttendanceAssistantState extends State<ScanAttendanceAssistant> {
                         await DatabaseTeacherClass(teacherUID, className)
                             .addAssistantToAttendance(student)
                             .then((val) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text('Success attend the meeting!')));
                           Navigator.pop(context);
                         });
                       },
                       child: Container(
-                        padding: EdgeInsets.all(10.0),
-                        color: Styles.primaryColor,
+                        padding: const EdgeInsets.all(10.0),
+                        color: StyleColors.primaryColor,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               'Subject Code : ${result!.code}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16.0,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w700),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10.0,
                             ),
-                            Text(
+                            const Text(
                               'Tap to attend this meeting code',
                               style: TextStyle(
                                   color: Colors.white,

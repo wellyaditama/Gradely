@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
-import 'package:gradely_app/model/classroom.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
 import 'package:gradely_app/ui/student/scan_qr_class.dart';
@@ -32,7 +31,7 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Join Class'),
-        backgroundColor: Styles.primaryColor,
+        backgroundColor: StyleColors.primaryColor,
       ),
       body: Form(
         key: _formKey,
@@ -46,8 +45,8 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
             children: [
               Visibility(
                 child: const LinearProgressIndicator(
-                  color: Styles.secondaryColor,
-                  backgroundColor: Styles.primaryVariantColor,
+                  color: StyleColors.secondaryColor,
+                  backgroundColor: StyleColors.primaryVariantColor,
                   minHeight: 5.0,
                 ),
                 visible: loading,
@@ -61,7 +60,7 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
                   fontSize: 20.0,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w700,
-                  color: Styles.primaryColor,
+                  color: StyleColors.primaryColor,
                 ),
               ),
               const SizedBox(
@@ -96,7 +95,7 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -114,7 +113,7 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
                         loading = !loading;
                       });
 
-                      bool check = await DatabaseTeacherClass('', '')
+                      await DatabaseTeacherClass('', '')
                           .checkIfClassroomExist(classToken)
                           .then((value) {
                         print(value);
@@ -128,20 +127,20 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
                         String className = token.substring(28, 33);
 
                         if (value) {
-                          AddNewClass(
+                          addNewClass(
                               teacherUID, className, widget.userRegister);
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Success!')));
+                              const SnackBar(content: Text('Success!')));
                         } else {
                           ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text('Failed!')));
+                              .showSnackBar(const SnackBar(content: Text('Failed!')));
                         }
 
                         return value;
                       });
                     }
                   },
-                  style: ElevatedButton.styleFrom(primary: Styles.primaryColor),
+                  style: ElevatedButton.styleFrom(primary: StyleColors.primaryColor),
                   child: const Text(
                     'Join',
                     style: TextStyle(
@@ -158,7 +157,7 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
                     final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => ScanQRClass(setData: setData,),));
                     textController.text = result;
                   },
-                  style: ElevatedButton.styleFrom(primary: Styles.primaryColor),
+                  style: ElevatedButton.styleFrom(primary: StyleColors.primaryColor),
                   child: const Text(
                     'Scan QR',
                     style: TextStyle(
@@ -181,18 +180,15 @@ class _JoinClassAssistantUIState extends State<JoinClassAssistantUI> {
     });
   }
 
-  void AddNewClass(
+  void addNewClass(
       String teacherUID, String className, UserRegister userRegister) async {
-    Classroom? classroom = await DatabaseTeacherClass(teacherUID, className)
+    await DatabaseTeacherClass(teacherUID, className)
         .getClass()
         .then((value) {
-      if (value != null) {
-        DatabaseTeacherClass(userRegister.uid, className)
-            .updateTeacherClassData(value);
-        print(value.className);
-        DatabaseTeacherClass(teacherUID, className)
-            .addAssistantToClasses(userRegister);
-      }
+      DatabaseTeacherClass(userRegister.uid, className)
+          .updateTeacherClassData(value);
+      DatabaseTeacherClass(teacherUID, className)
+          .addAssistantToClasses(userRegister);
     });
   }
 }

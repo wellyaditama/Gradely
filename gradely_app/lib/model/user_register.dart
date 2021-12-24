@@ -1,5 +1,3 @@
-import 'package:gradely_app/ui/authentication/register_ui.dart';
-
 class UserRegister {
   final String uid;
   final String email;

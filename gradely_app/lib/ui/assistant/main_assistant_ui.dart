@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradely_app/common/constant.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
@@ -33,7 +33,7 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Styles.primaryColor,
+        backgroundColor: StyleColors.primaryColor,
         title: Text(_title),
         actions: [
           IconButton(
@@ -117,7 +117,7 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
             ),
             ListTile(
               title: const Text('Home'),
-              leading: Icon(Icons.home),
+              leading: const Icon(Icons.home),
               onTap: () {
                 setState(() {
                   _currentMenu = 1;
@@ -127,7 +127,7 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
             ),
             ListTile(
               title: const Text('Account'),
-              leading: Icon(Icons.account_circle),
+              leading: const Icon(Icons.account_circle),
               onTap: () {
                 setState(() {
                   _currentMenu = 2;
@@ -137,7 +137,7 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
             ),
             ListTile(
               title: const Text('Classes'),
-              leading: Icon(Icons.class_),
+              leading: const Icon(Icons.class_),
               onTap: () {
                 setState(() {
                   _currentMenu = 3;
@@ -148,7 +148,7 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
             const Divider(),
             ListTile(
               title: const Text('Share'),
-              leading: Icon(Icons.share),
+              leading: const Icon(Icons.share),
               onTap: () {
                 String message = 'Gradely is an App that help your practicum session easy\nDownload Gradely from this link: \nhttps://drive.google.com/drive/folders/1Q5J0obDb_wflpQm-reElVbMR-Ic1QGbm?usp=sharing';
                 Share.share(message);
@@ -156,14 +156,14 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
             ),
             ListTile(
               title: const Text('Help'),
-              leading: Icon(Icons.help),
+              leading: const Icon(Icons.help),
               onTap: () {
                 Utility.launchURL('https://drive.google.com/drive/folders/1Ulan6Jh3UEiMv9Lt4KqjKzT2RG3riFoG?usp=sharing');
               },
             ),
             ListTile(
               title: const Text('About'),
-              leading: Icon(Icons.info),
+              leading: const Icon(Icons.info),
               onTap: () {
                 setState(() {
                   _currentMenu = 7;
@@ -173,12 +173,12 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
             ),
             ListTile(
               title: const Text('Logout'),
-              leading: Icon(Icons.exit_to_app),
+              leading: const Icon(Icons.exit_to_app),
               onTap: () {
                 FutureBuilder<dynamic>(
                   future: _authenticationService.signOut(),
                   builder: (context, snapshot) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   },
                 );
               },
@@ -187,17 +187,17 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Column(
           children: [
             if (_currentMenu == 1) ...[
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: double.infinity,
-                child: Text(
+                child: const Text(
                   'All the Classes',
                   style: TextStyle(
                     fontFamily: 'Poppins',
@@ -208,14 +208,14 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
                   textAlign: TextAlign.start,
                 ),
               ),
-              Divider(),
-              ClassesStudentUI()
+              const Divider(),
+              const ClassesStudentUI()
             ] else if (_currentMenu == 2) ...[
-              AccountTeacherUI(),
+              const AccountTeacherUI(),
             ] else if (_currentMenu == 3) ...[
-              ClassesStudentUI(),
+              const ClassesStudentUI(),
               TextButton(
-                child: Text('Join now'),
+                child: const Text('Join now'),
                 onPressed: () {
                   UserRegister _userRegister = widget.userRegister;
 
@@ -223,13 +223,13 @@ class _HomeAssistantUIState extends State<HomeAssistantUI> {
                 },
               ),
             ] else if (_currentMenu == 4) ...[
-              Text('This is menu 4'),
+              const Text('This is menu 4'),
             ] else if (_currentMenu == 5) ...[
-              Text('This is menu 5'),
+              const Text('This is menu 5'),
             ] else if (_currentMenu == 6) ...[
-              Text('This is menu 6'),
+              const Text('This is menu 6'),
             ] else if (_currentMenu == 7) ...[
-              AboutUI(),
+              const AboutUI(),
             ]
           ],
         ),

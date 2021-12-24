@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseStorageService {
   static UploadTask? uploadFile(String destination, File file) {
@@ -10,7 +11,7 @@ class FirebaseStorageService {
 
       return ref.putFile(file);
     } on FirebaseException catch (e) {
-      print(e.message);
+      debugPrint(e.message);
     }
   }
 

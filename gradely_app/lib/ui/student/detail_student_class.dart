@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
@@ -33,8 +33,8 @@ class _DetailStudentClassState extends State<DetailStudentClass> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detail Class'),
-        backgroundColor: Styles.primaryColor,
+        title: const Text('Detail Class'),
+        backgroundColor: StyleColors.primaryColor,
         actions: [
           IconButton(
             onPressed: () {
@@ -42,15 +42,15 @@ class _DetailStudentClassState extends State<DetailStudentClass> {
                   'Join to class ' + widget.classroom.subjectName + ' ' +
                       widget.classroom.className);
             },
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
           ),
           IconButton(
             onPressed: () async {
               await DatabaseTeacherClass(widget.classroom.teacherID, widget.classroom.className).deleteClass(widget.classroom).then((value) => Navigator.pop(context));
             },
-            icon: Icon(Icons.delete_outline_rounded),
+            icon: const Icon(Icons.delete_outline_rounded),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10.0,
           )
         ],
@@ -103,7 +103,7 @@ class _DetailStudentClassState extends State<DetailStudentClass> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -148,7 +148,7 @@ class _DetailStudentClassState extends State<DetailStudentClass> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -193,7 +193,7 @@ class _DetailStudentClassState extends State<DetailStudentClass> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -238,7 +238,7 @@ class _DetailStudentClassState extends State<DetailStudentClass> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/history.dart';
@@ -72,7 +73,7 @@ class DatabaseTeacherClass {
       'day': classroom.day,
       'classToken': classroom.classToken,
       'isStarted': classroom.isStarted,
-    }).catchError((e) => print(e.toString()));
+    }).catchError((e) => debugPrint(e.toString()));
   }
 
   Future addStudentToClasses(UserRegister userRegister) async {
@@ -89,7 +90,7 @@ class DatabaseTeacherClass {
       'gender': userRegister.gender,
       'semester': userRegister.semester,
       'currentAccountType': userRegister.currentAccountType,
-    }).catchError((e) => print(e.toString()));
+    }).catchError((e) => debugPrint(e.toString()));
   }
 
   Future addAssistantToClasses(UserRegister userRegister) async {
@@ -106,7 +107,7 @@ class DatabaseTeacherClass {
       'gender': userRegister.gender,
       'semester': userRegister.semester,
       'currentAccountType': userRegister.currentAccountType,
-    }).catchError((e) => print(e.toString()));
+    }).catchError((e) => debugPrint(e.toString()));
   }
 
   Future addStudentToAttendance(Student student) async {
@@ -121,7 +122,7 @@ class DatabaseTeacherClass {
       'email': student.email,
       'name': student.name,
       'attendanceTime': student.attendanceTime,
-    }).catchError((e) => print(e.toString()));
+    }).catchError((e) => debugPrint(e.toString()));
   }
 
   Future addAssistantToAttendance(Student student) async {
@@ -136,7 +137,7 @@ class DatabaseTeacherClass {
       'email': student.email,
       'name': student.name,
       'attendanceTime': student.attendanceTime,
-    }).catchError((e) => print(e.toString()));
+    }).catchError((e) => debugPrint(e.toString()));
   }
 
   Future addTeacherHistory(TeacherHistory teacherHistory) async {
@@ -149,7 +150,7 @@ class DatabaseTeacherClass {
       'description' : teacherHistory.description,
       'date' : Utility.convertDateTo12HFormat(DateTime.now()),
 
-    }).catchError((e) => print(e.toString()));
+    }).catchError((e) => debugPrint(e.toString()));
 
   }
 
@@ -165,11 +166,11 @@ class DatabaseTeacherClass {
       'email': student.email,
       'name': student.name,
       'attendanceTime': student.attendanceTime,
-    }).catchError((e) => print(e.toString()));
+    }).catchError((e) => debugPrint(e.toString()));
   }
 
   Future<String> addAllStudentToReviewSession(List<Student> listStudent) async {
-    listStudent.forEach((student) {
+    for (var student in listStudent) {
       classCollection
           .doc(uid)
           .collection('teacherClasses')
@@ -184,8 +185,8 @@ class DatabaseTeacherClass {
         'attendanceTime': student.attendanceTime,
       }).then((value) {
         return 'Success';
-      }).catchError((e) => print(e.toString()));
-    });
+      }).catchError((e) => debugPrint(e.toString()));
+    }
     return 'Failed';
   }
 
@@ -236,7 +237,7 @@ class DatabaseTeacherClass {
       for (DocumentSnapshot doc in snapshot.docs) {
         doc.reference.delete();
       }
-    }).catchError((e) => print(e.toString()));
+    }).catchError((e) => debugPrint(e.toString()));
   }
 
   Future deleteClass(Classroom classroom) async {
@@ -245,7 +246,7 @@ class DatabaseTeacherClass {
         .collection('teacherClasses')
         .doc(className)
         .delete()
-        .catchError((e) => print(e.toString()));
+        .catchError((e) => debugPrint(e.toString()));
   }
 
   Future<String> updateStudentGrade(StudentGrade studentGrade,
@@ -263,7 +264,7 @@ class DatabaseTeacherClass {
       'grade': grade,
       'attendanceTime': studentGrade.attendanceTime,
     }).then((value) => 'Success').catchError((e) {
-      print(e.toString());
+      debugPrint(e.toString());
     });
     return 'Failed';
   }
@@ -357,13 +358,6 @@ class DatabaseTeacherClass {
   Future<bool> checkIfClassroomExist(String token) async {
     String teacherUID = token.substring(0, 28);
     String className = token.substring(28, 33);
-    String classToken = token.substring(34);
-    int length = token.length;
-
-    print(teacherUID);
-    print(className);
-    print(classToken);
-    print(length);
 
     return await classCollection
         .doc(teacherUID)

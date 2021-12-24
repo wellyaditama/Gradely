@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanQRClass extends StatefulWidget {
@@ -55,7 +55,7 @@ class _ScanQRClassState extends State<ScanQRClass> {
                         children: [
                           Container(
                             padding: EdgeInsets.all(10.0),
-                            color: Styles.primaryColor,
+                            color: StyleColors.primaryColor,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [

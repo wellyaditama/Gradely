@@ -1,7 +1,6 @@
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/student_grade.dart';
-import 'package:gradely_app/model/students.dart';
 import 'package:gradely_app/services/pdf/pdf_api.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
@@ -119,7 +118,7 @@ class PdfReviewSession {
       data: data,
       border: null,
       headerStyle: TextStyle(fontWeight: FontWeight.bold),
-      headerDecoration: BoxDecoration(color: PdfColors.grey300),
+      headerDecoration: const BoxDecoration(color: PdfColors.grey300),
       cellHeight: 30,
       cellAlignments: {
         0: Alignment.centerLeft,

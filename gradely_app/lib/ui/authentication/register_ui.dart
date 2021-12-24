@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
@@ -22,8 +22,8 @@ class RegisterUI extends StatefulWidget {
 class _RegisterUIState extends State<RegisterUI> {
   final AuthenticationService _authService = AuthenticationService();
   final _formKey = GlobalKey<FormState>();
-  final snackBar = SnackBar(content: Text('Form invalid!'));
-  final snackBarError = SnackBar(content: Text('Invalid!'));
+  final snackBar = const SnackBar(content: Text('Form invalid!'));
+  final snackBarError = const SnackBar(content: Text('Invalid!'));
   final List<String> accountType = ['Student', 'Teacher', 'Assistant'];
   bool loading = false;
   String email = '';
@@ -44,24 +44,24 @@ class _RegisterUIState extends State<RegisterUI> {
         child: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            decoration: BoxDecoration(color: Styles.primaryColor),
+            decoration: const BoxDecoration(color: StyleColors.primaryColor),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Visibility(
-                  child: LinearProgressIndicator(
-                    color: Styles.secondaryColor,
-                    backgroundColor: Styles.primaryVariantColor,
+                  child: const LinearProgressIndicator(
+                    color: StyleColors.secondaryColor,
+                    backgroundColor: StyleColors.primaryVariantColor,
                     minHeight: 5.0,
                   ),
                   visible: loading,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
-                Text(
+                const Text(
                   'Hello Again',
                   style: TextStyle(
                     fontSize: 36.0,
@@ -70,9 +70,9 @@ class _RegisterUIState extends State<RegisterUI> {
                     color: Colors.white,
                   ),
                 ),
-                Flexible(
+                const Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                         horizontal: 10.0, vertical: 20.0),
                     child: Text(
                       "Register to our app!",
@@ -97,12 +97,12 @@ class _RegisterUIState extends State<RegisterUI> {
                           child: Lottie.asset('assets/ic_login_lottie.json'),
                         ),
                         DropdownButtonFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Styles.primaryColor, width: 2.0),
+                                  color: StyleColors.primaryColor, width: 2.0),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderSide:
@@ -110,7 +110,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             ),
                           ),
                           value: accountType[0],
-                          hint: Text('Choose Account Type'),
+                          hint: const Text('Choose Account Type'),
                           onChanged: (value) {
                             setState(() {
                               currentAccountType = value.toString();
@@ -133,7 +133,7 @@ class _RegisterUIState extends State<RegisterUI> {
                                 value: val, child: Text(val));
                           }).toList(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextFormField(
@@ -147,7 +147,7 @@ class _RegisterUIState extends State<RegisterUI> {
                               return 'Enter your name!';
                             }
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.account_circle),
                             hintText: 'Name',
                             fillColor: Colors.white,
@@ -159,7 +159,7 @@ class _RegisterUIState extends State<RegisterUI> {
                                 Radius.circular(20.0),
                               ),
                               borderSide: BorderSide(
-                                  color: Styles.primaryVariantColor,
+                                  color: StyleColors.primaryVariantColor,
                                   width: 2.0),
                             ),
                             border: OutlineInputBorder(
@@ -169,7 +169,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextFormField(
@@ -186,7 +186,7 @@ class _RegisterUIState extends State<RegisterUI> {
                               return 'Enter valid email!';
                             }
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.email),
                             hintText: 'Email',
                             fillColor: Colors.white,
@@ -198,7 +198,7 @@ class _RegisterUIState extends State<RegisterUI> {
                                 Radius.circular(20.0),
                               ),
                               borderSide: BorderSide(
-                                  color: Styles.primaryVariantColor,
+                                  color: StyleColors.primaryVariantColor,
                                   width: 2.0),
                             ),
                             border: OutlineInputBorder(
@@ -208,7 +208,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         Container(
@@ -220,10 +220,10 @@ class _RegisterUIState extends State<RegisterUI> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: 10.0),
+                                margin: const EdgeInsets.only(top: 10.0),
                                 width: double.infinity,
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Text(
+                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                child: const Text(
                                   'Gender',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -281,7 +281,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextFormField(
@@ -295,7 +295,7 @@ class _RegisterUIState extends State<RegisterUI> {
                               return 'Enter your University!';
                             }
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.school),
                             hintText: 'University',
                             fillColor: Colors.white,
@@ -307,7 +307,7 @@ class _RegisterUIState extends State<RegisterUI> {
                                 Radius.circular(20.0),
                               ),
                               borderSide: BorderSide(
-                                  color: Styles.primaryVariantColor,
+                                  color: StyleColors.primaryVariantColor,
                                   width: 2.0),
                             ),
                             border: OutlineInputBorder(
@@ -317,12 +317,12 @@ class _RegisterUIState extends State<RegisterUI> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: 10.0),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0)),
@@ -332,7 +332,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             children: [
                               Text(
                                 'Semester : $semester',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w700,
@@ -352,7 +352,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextFormField(
@@ -371,7 +371,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             }
                           },
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.lock_outline),
                             hintText: 'Password',
                             fillColor: Colors.white,
@@ -383,7 +383,7 @@ class _RegisterUIState extends State<RegisterUI> {
                                 Radius.circular(20.0),
                               ),
                               borderSide: BorderSide(
-                                  color: Styles.primaryVariantColor,
+                                  color: StyleColors.primaryVariantColor,
                                   width: 2.0),
                             ),
                             border: OutlineInputBorder(
@@ -393,7 +393,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextFormField(
@@ -411,7 +411,7 @@ class _RegisterUIState extends State<RegisterUI> {
                             }
                           },
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.lock_outline),
                             hintText: 'Validate Password',
                             fillColor: Colors.white,
@@ -423,7 +423,7 @@ class _RegisterUIState extends State<RegisterUI> {
                                 Radius.circular(20.0),
                               ),
                               borderSide: BorderSide(
-                                  color: Styles.primaryVariantColor,
+                                  color: StyleColors.primaryVariantColor,
                                   width: 2.0),
                             ),
                             border: OutlineInputBorder(
@@ -433,10 +433,10 @@ class _RegisterUIState extends State<RegisterUI> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () async {
@@ -482,8 +482,8 @@ class _RegisterUIState extends State<RegisterUI> {
                               print(user);
                             },
                             style: ElevatedButton.styleFrom(
-                                primary: Styles.secondaryColor),
-                            child: Text(
+                                primary: StyleColors.secondaryColor),
+                            child: const Text(
                               'Register',
                               style: TextStyle(
                                   color: Colors.white,
@@ -492,13 +492,13 @@ class _RegisterUIState extends State<RegisterUI> {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
                               widget.toggleView();
                             },
-                            child: Text(
+                            child: const Text(
                               'Login',
                               style: TextStyle(
                                   color: Colors.white,

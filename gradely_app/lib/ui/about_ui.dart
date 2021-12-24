@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 
 class AboutUI extends StatelessWidget {
@@ -233,7 +233,7 @@ class AboutUI extends StatelessWidget {
                       text: 'flaticon.com',
                       style: TextStyle(
                         fontFamily: 'Poppins',
-                        color: Styles.primaryColor,
+                        color: StyleColors.primaryColor,
                         fontSize: 16.0,
                         fontWeight: FontWeight.w700,
                       ),
@@ -264,7 +264,7 @@ class AboutUI extends StatelessWidget {
                       text: 'undraw.co ',
                       style: TextStyle(
                         fontFamily: 'Poppins',
-                        color: Styles.primaryColor,
+                        color: StyleColors.primaryColor,
                         fontSize: 16.0,
                         fontWeight: FontWeight.w700,
                       ),
@@ -281,7 +281,7 @@ class AboutUI extends StatelessWidget {
                       text: 'vexels.com',
                       style: TextStyle(
                         fontFamily: 'Poppins',
-                        color: Styles.primaryColor,
+                        color: StyleColors.primaryColor,
                         fontSize: 16.0,
                         fontWeight: FontWeight.w700,
                       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
 
@@ -60,7 +60,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                   Radius.circular(20.0),
                 ),
                 borderSide: BorderSide(
-                    color: Styles.primaryVariantColor,
+                    color: StyleColors.primaryVariantColor,
                     width: 2.0),
               ),
               border: OutlineInputBorder(
@@ -70,7 +70,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
               ),
             ),
           ),
-          SizedBox(height: 20.0,),
+          const SizedBox(height: 20.0,),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -80,7 +80,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                  primary: Styles.secondaryColor),
+                  primary: StyleColors.secondaryColor),
               child: const Text(
                 'Reset',
                 style: TextStyle(

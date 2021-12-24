@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/student_grade.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
 

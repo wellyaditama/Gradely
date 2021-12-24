@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
@@ -42,7 +42,7 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
               Container(
                 padding: EdgeInsets.symmetric(vertical: 10.0),
                 decoration: BoxDecoration(
-                  color: Styles.primaryColor,
+                  color: StyleColors.primaryColor,
                 ),
                 child: Image.asset(
                   'assets/ic_teacher_male.png',
@@ -84,7 +84,7 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
                               Radius.circular(20.0),
                             ),
                             borderSide: BorderSide(
-                                color: Styles.primaryVariantColor, width: 2.0),
+                                color: StyleColors.primaryVariantColor, width: 2.0),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -123,7 +123,7 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
                               Radius.circular(20.0),
                             ),
                             borderSide: BorderSide(
-                                color: Styles.primaryVariantColor, width: 2.0),
+                                color: StyleColors.primaryVariantColor, width: 2.0),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -162,7 +162,7 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
                               Radius.circular(20.0),
                             ),
                             borderSide: BorderSide(
-                                color: Styles.primaryVariantColor, width: 2.0),
+                                color: StyleColors.primaryVariantColor, width: 2.0),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -201,7 +201,7 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
                               Radius.circular(20.0),
                             ),
                             borderSide: BorderSide(
-                                color: Styles.primaryVariantColor, width: 2.0),
+                                color: StyleColors.primaryVariantColor, width: 2.0),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -240,7 +240,7 @@ class _AccountTeacherUIState extends State<AccountTeacherUI> {
                               Radius.circular(20.0),
                             ),
                             borderSide: BorderSide(
-                                color: Styles.primaryVariantColor, width: 2.0),
+                                color: StyleColors.primaryVariantColor, width: 2.0),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(

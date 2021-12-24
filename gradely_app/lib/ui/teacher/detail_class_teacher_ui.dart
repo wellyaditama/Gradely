@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
@@ -46,7 +46,7 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Detail Class'),
-        backgroundColor: Styles.primaryColor,
+        backgroundColor: StyleColors.primaryColor,
         actions: [
           IconButton(
             onPressed: () {
@@ -151,7 +151,7 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -196,7 +196,7 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -241,7 +241,7 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -286,7 +286,7 @@ class _DetailClassTeacherState extends State<DetailClassTeacher> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(

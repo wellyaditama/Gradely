@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/students.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
@@ -69,7 +69,7 @@ class _ScanAttendanceStudentState extends State<ScanAttendanceStudent> {
                       },
                       child: Container(
                         padding: EdgeInsets.all(10.0),
-                        color: Styles.primaryColor,
+                        color: StyleColors.primaryColor,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [

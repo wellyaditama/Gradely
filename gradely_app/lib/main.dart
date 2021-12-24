@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gradely_app/ui/firebase_initialization.dart';
 import 'package:gradely_app/ui/splash_screens_ui.dart';
 
-import 'common/styles.dart';
+import 'common/style_colors.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +22,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Styles.themeColor,
-        primaryColor: Styles.primaryColor,
+        primarySwatch: StyleColors.themeColor,
+        primaryColor: StyleColors.primaryColor,
         fontFamily: "Poppins",
       ),
       home: SplashScreensUI(),

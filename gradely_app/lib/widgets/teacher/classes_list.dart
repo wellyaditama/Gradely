@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradely_app/common/constant.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:provider/provider.dart';
 

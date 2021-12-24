@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/authentication_service.dart';
@@ -33,15 +33,15 @@ class _LoginUIState extends State<LoginUI> {
           child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 1.1,
-            decoration: const BoxDecoration(color: Styles.primaryColor),
+            decoration: const BoxDecoration(color: StyleColors.primaryColor),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Visibility(
                   child: const LinearProgressIndicator(
-                    color: Styles.secondaryColor,
-                    backgroundColor: Styles.primaryVariantColor,
+                    color: StyleColors.secondaryColor,
+                    backgroundColor: StyleColors.primaryVariantColor,
                     minHeight: 5.0,
                   ),
                   visible: loading,
@@ -109,7 +109,7 @@ class _LoginUIState extends State<LoginUI> {
                                 Radius.circular(20.0),
                               ),
                               borderSide: BorderSide(
-                                  color: Styles.primaryVariantColor,
+                                  color: StyleColors.primaryVariantColor,
                                   width: 2.0),
                             ),
                             border: OutlineInputBorder(
@@ -150,7 +150,7 @@ class _LoginUIState extends State<LoginUI> {
                                 Radius.circular(20.0),
                               ),
                               borderSide: BorderSide(
-                                  color: Styles.primaryVariantColor,
+                                  color: StyleColors.primaryVariantColor,
                                   width: 2.0),
                             ),
                             border: OutlineInputBorder(
@@ -201,7 +201,7 @@ class _LoginUIState extends State<LoginUI> {
                               print(user);
                             },
                             style: ElevatedButton.styleFrom(
-                                primary: Styles.secondaryColor),
+                                primary: StyleColors.secondaryColor),
                             child: const Text(
                               'Login',
                               style: TextStyle(
@@ -242,8 +242,8 @@ class _LoginUIState extends State<LoginUI> {
   void _showResetPassword() {
     showModalBottomSheet(context: context, builder: (context) {
       return Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-        child: ResetPasswordForm(),
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+        child: const ResetPasswordForm(),
       );
     });
   }

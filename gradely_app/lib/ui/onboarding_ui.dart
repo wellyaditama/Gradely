@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/ui/firebase_initialization.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -71,7 +71,7 @@ class OnboardingScreensUI extends StatelessWidget {
               },
               child: Text('Get Started', style: TextStyle(color: Colors.white),),
               style: ElevatedButton.styleFrom(
-                primary: Styles.primaryColor,
+                primary: StyleColors.primaryColor,
                 padding: EdgeInsets.symmetric(horizontal: 40.0),
               ),
             ),
@@ -92,8 +92,8 @@ class OnboardingScreensUI extends StatelessWidget {
         dotsDecorator: DotsDecorator(
           size: const Size.square(10.0),
           activeSize: const Size(20.0, 10.0),
-          activeColor: Styles.secondaryVariantColor,
-          color: Styles.primaryColor,
+          activeColor: StyleColors.secondaryVariantColor,
+          color: StyleColors.primaryColor,
           spacing: const EdgeInsets.symmetric(horizontal: 3.0),
           activeShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),

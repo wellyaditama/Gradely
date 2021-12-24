@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class WidgetLoadingScreens extends StatelessWidget {
@@ -15,8 +15,8 @@ class WidgetLoadingScreens extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Styles.primaryColor,
-              Styles.primaryVariantColor,
+              StyleColors.primaryColor,
+              StyleColors.primaryVariantColor,
             ]),
       ),
       child: const Padding(

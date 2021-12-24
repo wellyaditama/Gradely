@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class Styles {
+class StyleColors {
   static const Color primaryColor = Color(0xFF3BC3FF);
   static const Color primaryVariantColor = Color(0xFF0A8AC4);
   static const Color secondaryColor = Color(0xFF063051);

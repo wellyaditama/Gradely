@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/common/utils.dart';
 import 'package:gradely_app/model/history.dart';
 
@@ -20,7 +20,7 @@ class _HistoryListTileState extends State<HistoryListTile> {
       margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0),
-        color: Styles.primaryColor,
+        color: StyleColors.primaryColor,
         child: ListTile(
           leading: (isPracticum)
               ? Image.asset(

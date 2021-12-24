@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animator/flutter_animator.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/ui/firebase_initialization.dart';
 import 'package:lottie/lottie.dart';
 import 'onboarding_ui.dart';
@@ -44,8 +44,8 @@ class _SplashScreensUIState extends State<SplashScreensUI> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
               colors: [
-                Styles.primaryColor,
-                Styles.primaryVariantColor,
+                StyleColors.primaryColor,
+                StyleColors.primaryVariantColor,
               ],
               begin: FractionalOffset(0.0, 0.0),
               end: FractionalOffset(1.0, 0.0),

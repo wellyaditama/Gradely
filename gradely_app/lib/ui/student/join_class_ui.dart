@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/user_register.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
@@ -31,7 +31,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Join Class'),
-        backgroundColor: Styles.primaryColor,
+        backgroundColor: StyleColors.primaryColor,
       ),
       body: Form(
         key: _formKey,
@@ -45,8 +45,8 @@ class _JoinClassUIState extends State<JoinClassUI> {
             children: [
               Visibility(
                 child: LinearProgressIndicator(
-                  color: Styles.secondaryColor,
-                  backgroundColor: Styles.primaryVariantColor,
+                  color: StyleColors.secondaryColor,
+                  backgroundColor: StyleColors.primaryVariantColor,
                   minHeight: 5.0,
                 ),
                 visible: loading,
@@ -60,7 +60,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                   fontSize: 20.0,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w700,
-                  color: Styles.primaryColor,
+                  color: StyleColors.primaryColor,
                 ),
               ),
               SizedBox(
@@ -95,7 +95,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                       Radius.circular(20.0),
                     ),
                     borderSide: BorderSide(
-                        color: Styles.primaryVariantColor, width: 2.0),
+                        color: StyleColors.primaryVariantColor, width: 2.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -138,7 +138,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                       });
                     }
                   },
-                  style: ElevatedButton.styleFrom(primary: Styles.primaryColor),
+                  style: ElevatedButton.styleFrom(primary: StyleColors.primaryColor),
                   child: Text(
                     'Join',
                     style: TextStyle(
@@ -155,7 +155,7 @@ class _JoinClassUIState extends State<JoinClassUI> {
                     final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => ScanQRClass(setData: setData,),));
                     textController.text = result;
                   },
-                  style: ElevatedButton.styleFrom(primary: Styles.primaryColor),
+                  style: ElevatedButton.styleFrom(primary: StyleColors.primaryColor),
                   child: Text(
                     'Scan QR',
                     style: TextStyle(

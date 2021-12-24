@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/ui/teacher/detail_class_teacher_ui.dart';
 
@@ -22,7 +22,7 @@ class ClassesListTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: Container(
-          color: Styles.primaryColor,
+          color: StyleColors.primaryColor,
           child: ListTile(
             leading: WidgetSmallQRCodeImage(
               qrData: qrData,

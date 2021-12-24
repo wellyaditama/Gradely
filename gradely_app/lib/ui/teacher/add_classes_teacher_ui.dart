@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradely_app/common/constant.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/user_uid.dart';
 import 'package:gradely_app/services/firebase/cloud_firestore_service.dart';
@@ -54,7 +54,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          decoration: BoxDecoration(color: Styles.accentColor2),
+          decoration: BoxDecoration(color: StyleColors.accentColor2),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Form(
@@ -120,7 +120,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                           Radius.circular(20.0),
                         ),
                         borderSide: BorderSide(
-                            color: Styles.primaryVariantColor, width: 2.0),
+                            color: StyleColors.primaryVariantColor, width: 2.0),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
@@ -175,7 +175,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                           Radius.circular(20.0),
                         ),
                         borderSide: BorderSide(
-                            color: Styles.primaryVariantColor, width: 2.0),
+                            color: StyleColors.primaryVariantColor, width: 2.0),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
@@ -228,7 +228,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                           Radius.circular(20.0),
                         ),
                         borderSide: BorderSide(
-                            color: Styles.primaryVariantColor, width: 2.0),
+                            color: StyleColors.primaryVariantColor, width: 2.0),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
@@ -264,7 +264,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                       fillColor: Colors.white,
                       filled: true,
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Styles.primaryColor, width: 2.0),
+                        borderSide: BorderSide(color: StyleColors.primaryColor, width: 2.0),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey, width: 2.0),
@@ -326,7 +326,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                       },
                       icon: Icon(
                         Icons.more_time,
-                        color: Styles.primaryColor,
+                        color: StyleColors.primaryColor,
                       ),
                       label: Text('Choose Time'),
                       style: TextButton.styleFrom(
@@ -374,7 +374,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                       },
                       icon: Icon(
                         Icons.more_time,
-                        color: Styles.primaryColor,
+                        color: StyleColors.primaryColor,
                       ),
                       label: Text('Choose Time'),
                       style: TextButton.styleFrom(
@@ -419,7 +419,7 @@ class _ClassesAddTeacherUIState extends State<ClassesAddTeacherUI> {
                     },
                     child: Text(
                       'Add new Classes',
-                      style: TextStyle(color: Styles.primaryColor),
+                      style: TextStyle(color: StyleColors.primaryColor),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,

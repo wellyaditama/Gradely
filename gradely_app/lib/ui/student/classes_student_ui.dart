@@ -32,7 +32,7 @@ class _ClassesStudentUIState extends State<ClassesStudentUI> {
                     'assets/ic_undraw_study.png',
                     fit: BoxFit.fill,
                   ),
-                  Text(
+                  const Text(
                     "You don't have class! Join now!",
                     style: TextStyle(
                       fontSize: 20.0,
@@ -48,7 +48,7 @@ class _ClassesStudentUIState extends State<ClassesStudentUI> {
             return ClassesListStudent(classrooms: classroom,);
           }
         } else {
-          return WidgetLoadingScreens();
+          return const WidgetLoadingScreens();
         }
       },
     );
@@ -58,7 +58,7 @@ class _ClassesStudentUIState extends State<ClassesStudentUI> {
       AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
     List<Classroom> _listClassroom = [];
 
-    snapshot.data!.docs.forEach((doc) {
+    for (var doc in snapshot.data!.docs) {
       Timestamp classBegin = doc['classBegin'];
       Timestamp classEnd = doc['classEnd'];
 
@@ -77,7 +77,7 @@ class _ClassesStudentUIState extends State<ClassesStudentUI> {
           doc['day'],
           doc['classToken'],
           doc['isStarted'] ?? false));
-    });
+    }
 
     return _listClassroom;
   }

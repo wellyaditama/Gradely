@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradely_app/common/styles.dart';
+import 'package:gradely_app/common/style_colors.dart';
 import 'package:gradely_app/model/classroom.dart';
 import 'package:gradely_app/model/student_grade.dart';
 import 'package:gradely_app/model/students.dart';
@@ -33,7 +33,7 @@ class ListStudentReviewSession extends StatelessWidget {
         margin: const EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 10.0),
-          color: Styles.accentColor2,
+          color: StyleColors.accentColor2,
           child: ListTile(
             leading: Image.asset(
               'assets/ic_student_male.png',
